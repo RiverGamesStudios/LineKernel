@@ -1,5 +1,9 @@
 # LineKernel
 
+## Continuous Integration
+
+This project uses GitHub Actions to automatically build the kernel on every push to the main branch. The compiled kernel binary (`LineKernel`) is available as an artifact in the Actions tab for download (retained for 90 days).
+
 ## Dependencies
 
 - **`i686-elf-gcc`**: Cross-compiler for the i686-elf target. If not installed, run `bash build_toolchain.sh` to build and install it (requires a Debian-based system; this may take several minutes to an hour to complete).
