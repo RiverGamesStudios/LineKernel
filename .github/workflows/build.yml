@@ -16,15 +16,14 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y bash build-essential bison flex libgmp-dev libmpc-dev libmpfr-dev texinfo libisl-dev wget
+        sudo apt-get install -y build-essential bison flex libgmp-dev libmpc-dev libmpfr-dev texinfo libisl-dev wget
 
     - name: Build cross-compiler
       run: |
         export PATH="${{ runner.temp }}/cross/bin:$PATH"
-        bash build_toolchain.sh
+        sh build_toolchain.sh
       env:
         PREFIX: ${{ runner.temp }}/cross
-      shell: bash
 
     - name: Compile kernel
       run: |
