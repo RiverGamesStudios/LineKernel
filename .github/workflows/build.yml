@@ -19,10 +19,11 @@ jobs:
         sudo apt-get install -y build-essential bison flex libgmp-dev libmpc-dev libmpfr-dev texinfo libisl-dev wget
 
     - name: Build cross-compiler
-      run: bash build_toolchain.sh
+      run: |
+        export PATH="${{ runner.temp }}/cross/bin:$PATH"
+        sh build_toolchain.sh
       env:
         PREFIX: ${{ runner.temp }}/cross
-        PATH: ${{ runner.temp }}/cross/bin:${{ env.PATH }}
 
     - name: Compile kernel
       run: |
