@@ -13,7 +13,4 @@ void kernel_main(void)
 	terminal_initialize();
 
 	terminal_writestring("Hello, LineKernel!\n");
-	terminal_writestring("\n");
-	terminal_writestring("This is the epitimy of colebohte's brain at 10:47PM on a monday.\n");
-	terminal_writestring("I wrote these 2 lines, the first one was NexusSFan\n");
 }
