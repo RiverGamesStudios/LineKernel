@@ -1,0 +1,37 @@
+name: Build LineKernel
+
+on:
+  push:
+    branches: [ main, master ]
+    tags: [ 'v*' ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y build-essential bison flex libgmp-dev libmpc-dev libmpfr-dev texinfo libisl-dev wget
+
+    - name: Build cross-compiler
+      run: bash build_toolchain.sh
+      env:
+        PREFIX: ${{ runner.temp }}/cross
+        PATH: ${{ runner.temp }}/cross/bin:${{ env.PATH }}
+
+    - name: Compile kernel
+      run: |
+        export PATH="${{ runner.temp }}/cross/bin:$PATH"
+        make i386
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: LineKernel-i386
+        path: i386/LineKernel
+        retention-days: 90
