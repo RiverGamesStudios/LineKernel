@@ -10,9 +10,7 @@
 
 void kernel_main(void)
 {
-	/* This is a placeholder */
 	terminal_initialize();
-	terminal_writestring("Initializing Terminal...\n");
 
 	terminal_writestring("Hello, LineKernel!\n");
 }
