@@ -6,7 +6,7 @@ sudo apt update || true  # Ignore repo errors
 sudo apt install -y build-essential bison flex libgmp-dev libmpc-dev libmpfr-dev texinfo libisl-dev
 
 # Set variables
-export PREFIX="${PREFIX:-$HOME/opt/cross}"
+export PREFIX="$HOME/opt/cross"
 export TARGET=i686-elf
 export PATH="$PREFIX/bin:$PATH"
 
