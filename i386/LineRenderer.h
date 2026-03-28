@@ -17,10 +17,4 @@ void terminal_write(const char* data, size_t size);
 
 void terminal_writestring(const char* data);
 
-void terminal_log(const char* message, const char* status);
-
-void terminal_clear(void);
-
-void terminal_set_cursor_pos(const char* params);
-
 #endif
