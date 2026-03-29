@@ -1,6 +1,3 @@
-// this is a kernel :)
-// yours truly, the grue
-
 #if defined(__linux__) || defined(__GNU__)
 #error "Not cross-compiling!!!"
 #endif
@@ -9,19 +6,29 @@
 #error "Only compiles for i386!!!"
 #endif
 
+#include "config.h"
 #include "LineRenderer.h"
+#ifdef ps2_keyboard
 #include "ps2_keyboard.h"
+#endif // ps2_keyboard
+
+void initialize_start(void)
+{
+	terminal_initialize();
+#ifdef ps2_keyboard
+	keyboard_init();
+#endif // ps2_keyboard
+}
 
 void kernel_main(void)
 {
-	terminal_initialize();
-	keyboard_init();
+	initialize_start();
 
-	terminal_writestring("Hello, LineKernel!\nType to see what happens... (btw, no shift or backspace :))\n");
+	terminal_writestring("Hello, LineKernel!\n");
 
+#ifdef ps2_keyboard
 	for (;;) {
-		uint8_t scancode = keyboard_read_scancode();
-		char c = keyboard_to_ascii(scancode);
+		char c = keyboard_read_scancode_to_ascii();
 		if (c == '\b') {
 			// Not handling backspace cursor movement yet.
 		}
@@ -29,4 +36,5 @@ void kernel_main(void)
 			terminal_putchar(c);
 		}
 	}
+#endif // ps2_keyboard
 }

@@ -1,7 +1,3 @@
-// This is the header file for the PS/2 input controller, So i can
-// rub my penis across the keyboard and it actually registers as
-// valid input.
-
 #ifndef PS2_KEYBOARD_H
 #define PS2_KEYBOARD_H
 
@@ -23,5 +19,6 @@
 void keyboard_init();
 uint8_t keyboard_read_scancode();
 char keyboard_to_ascii(uint8_t scancode);
+char keyboard_read_scancode_to_ascii();
 
 #endif
