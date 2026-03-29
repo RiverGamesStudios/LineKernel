@@ -28,7 +28,15 @@ bios_tools.o: bios_tools.c
 boot.o: boot.s
 	$(AS) boot.s -o boot.o
 
-clean:
-	rm *.o LineKernel || true
+check: all
+	grub-file --is-x86-multiboot LineKernel
 
-.PHONY: clean all
+iso: check
+	cp -r ../iso .
+	cp LineKernel iso/boot/LineKernel
+	grub-mkrescue -o LineKernel.iso iso
+
+clean:
+	rm -r iso *.iso *.o LineKernel || true
+
+.PHONY: clean all iso check
