@@ -32,6 +32,9 @@ void kernel_main(void)
 		if (c == '\b') {
 			// Not handling backspace cursor movement yet.
 		}
+		else if (c == '\n') {
+			terminal_newline();
+		}
 		else if (c != 0) {
 			terminal_putchar(c);
 		}

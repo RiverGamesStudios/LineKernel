@@ -86,12 +86,17 @@ void terminal_putchar(char c)
 	}
 }
 
+void terminal_newline(void)
+{
+	terminal_row++;
+	terminal_column = 0;
+}
+
 void terminal_write(const char* data, size_t size)
 {
 	for (size_t i = 0; i < size; i++)
 		if (data[i] == '\n') {
-			terminal_row++;
-			terminal_column = 0;
+			terminal_newline();
 		}
 		else {
 			terminal_putchar(data[i]);
