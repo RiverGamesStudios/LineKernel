@@ -30,7 +30,7 @@ void kernel_main(void)
 	for (;;) {
 		char c = keyboard_read_scancode_to_ascii();
 		if (c == '\b') {
-			// Not handling backspace cursor movement yet.
+			terminal_backspace();
 		}
 		else if (c == '\n') {
 			terminal_newline();

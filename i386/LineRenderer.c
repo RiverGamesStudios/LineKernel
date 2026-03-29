@@ -92,6 +92,13 @@ void terminal_newline(void)
 	terminal_column = 0;
 }
 
+void terminal_backspace(void)
+{
+	const size_t index = terminal_row * VGA_WIDTH + terminal_column - 1;
+	terminal_buffer[index] = vga_entry(' ', terminal_color);
+	terminal_column--;
+}
+
 void terminal_write(const char* data, size_t size)
 {
 	for (size_t i = 0; i < size; i++)
