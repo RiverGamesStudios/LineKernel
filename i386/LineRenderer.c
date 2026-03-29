@@ -96,6 +96,9 @@ void terminal_initialize(void)
 			terminal_buffer[index] = vga_entry(' ', terminal_color);
 		}
 	}
+#ifdef serial_console
+	init_serial();
+#endif // serial_console
 #if !defined(vga_console) || !defined(console_cursor)
 	terminal_disable_cursor();
 #endif // !defined(vga_console) || !defined(console_cursor)

@@ -11,6 +11,9 @@
 #ifdef ps2_keyboard
 #include "ps2_keyboard.h"
 #endif // ps2_keyboard
+#ifdef serial_console
+#include "serial.h"
+#endif // ps2_keyboard
 
 void initialize_start(void)
 {
@@ -26,9 +29,11 @@ void kernel_main(void)
 
 	terminal_writestring("Hello, LineKernel!\n");
 
+	char c;
+
 	for (;;) {
 #ifdef ps2_keyboard
-		char c = keyboard_read_scancode_to_ascii();
+		c = keyboard_read_scancode_to_ascii();
 		terminal_write_for_char(c);
 #endif // ps2_keyboard
 	}
