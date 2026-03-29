@@ -1,5 +1,6 @@
 #include "config.h"
 #include "LineRenderer.h"
+#include "bios_tools.h"
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdint.h>
@@ -50,6 +51,37 @@ size_t terminal_column;
 uint8_t terminal_color;
 uint16_t* terminal_buffer = (uint16_t*)VGA_MEMORY;
 
+void terminal_enable_cursor(uint8_t cursor_start, uint8_t cursor_end)
+{
+#ifdef console_cursor
+	outb(0x3D4, 0x0A);
+	outb(0x3D5, (inb(0x3D5) & 0xC0) | cursor_start);
+
+	outb(0x3D4, 0x0B);
+	outb(0x3D5, (inb(0x3D5) & 0xE0) | cursor_end);
+#endif // console_cursor
+}
+
+void terminal_disable_cursor()
+{
+#ifdef console_cursor
+	outb(0x3D4, 0x0A);
+	outb(0x3D5, 0x20);
+#endif // console_cursor
+}
+
+void terminal_update_cursor(int x, int y)
+{
+#ifdef console_cursor
+	uint16_t pos = y * VGA_WIDTH + x;
+
+	outb(0x3D4, 0x0F);
+	outb(0x3D5, (uint8_t) (pos & 0xFF));
+	outb(0x3D4, 0x0E);
+	outb(0x3D5, (uint8_t) ((pos >> 8) & 0xFF));
+#endif // console_cursor
+}
+
 void terminal_setcolor(uint8_t color)
 {
 	terminal_color = color;
@@ -99,15 +131,24 @@ void terminal_backspace(void)
 	terminal_column--;
 }
 
+void terminal_write_for_char(const char c)
+{
+	if (c == '\b') {
+		terminal_backspace();
+	}
+	else if (c == '\n') {
+		terminal_newline();
+	}
+	else if (c != 0) {
+		terminal_putchar(c);
+	}
+	terminal_update_cursor(terminal_column, terminal_row);
+}
+
 void terminal_write(const char* data, size_t size)
 {
 	for (size_t i = 0; i < size; i++)
-		if (data[i] == '\n') {
-			terminal_newline();
-		}
-		else {
-			terminal_putchar(data[i]);
-		}
+		terminal_write_for_char(data[i]);
 }
 
 void terminal_writestring(const char* data)

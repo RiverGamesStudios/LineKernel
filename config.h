@@ -8,4 +8,7 @@
 /* Define for keyboard support */
 #define ps2_keyboard
 
+/* Define for cursor in the console */
+#define console_cursor
+
 #endif

@@ -29,15 +29,7 @@ void kernel_main(void)
 #ifdef ps2_keyboard
 	for (;;) {
 		char c = keyboard_read_scancode_to_ascii();
-		if (c == '\b') {
-			terminal_backspace();
-		}
-		else if (c == '\n') {
-			terminal_newline();
-		}
-		else if (c != 0) {
-			terminal_putchar(c);
-		}
+		terminal_write_for_char(c);
 	}
 #endif // ps2_keyboard
 }

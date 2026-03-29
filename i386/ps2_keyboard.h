@@ -1,5 +1,5 @@
-#ifndef PS2_KEYBOARD_H
-#define PS2_KEYBOARD_H
+#ifndef __PS2_KEYBOARD_H__
+#define __PS2_KEYBOARD_H__
 
 #include <stdint.h>
 
