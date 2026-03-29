@@ -18,7 +18,10 @@
 
 void keyboard_init();
 uint8_t keyboard_read_scancode();
+uint8_t keyboard_read_scancode_right_now();
 char keyboard_to_ascii(uint8_t scancode);
 char keyboard_read_scancode_to_ascii();
+char keyboard_read_scancode_to_ascii_right_now();
+int is_kbd_ready_to_read();
 
 #endif

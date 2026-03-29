@@ -11,6 +11,11 @@ void wait_kbd_write()
 	while (inb(PS2_STATUS_PORT) & PS2_STATUS_INPUT_FULL);
 }
 
+int is_kbd_ready_to_read()
+{
+	return (!(inb(PS2_STATUS_PORT) & PS2_STATUS_OUTPUT_FULL));
+}
+
 void wait_kbd_read()
 {
 	while (!(inb(PS2_STATUS_PORT) & PS2_STATUS_OUTPUT_FULL));
@@ -25,6 +30,11 @@ void keyboard_init()
 uint8_t keyboard_read_scancode()
 {
 	wait_kbd_read();
+	return inb(PS2_DATA_PORT);
+}
+
+uint8_t keyboard_read_scancode_right_now()
+{
 	return inb(PS2_DATA_PORT);
 }
 
@@ -47,6 +57,13 @@ char keyboard_to_ascii(uint8_t scancode)
 	}
 	
 	return 0;
+}
+
+char keyboard_read_scancode_to_ascii_right_now()
+{
+	uint8_t scancode = keyboard_read_scancode_right_now();
+	char c = keyboard_to_ascii(scancode);
+	return c;
 }
 
 char keyboard_read_scancode_to_ascii()

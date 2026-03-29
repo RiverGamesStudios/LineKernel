@@ -26,11 +26,16 @@ int serial_received()
    return inb(PORT + 5) & 1;
 }
 
+char read_serial_right_now()
+{
+   return inb(PORT);
+}
+
 char read_serial()
 {
    while (serial_received() == 0);
 
-   return inb(PORT);
+   return read_serial_right_now();
 }
 
 int is_transmit_empty()
