@@ -4,6 +4,9 @@
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdint.h>
+#ifdef serial_console
+#include "serial.h"
+#endif // serial_console
 
 enum vga_color {
 	VGA_COLOR_BLACK = 0,
@@ -53,33 +56,27 @@ uint16_t* terminal_buffer = (uint16_t*)VGA_MEMORY;
 
 void terminal_enable_cursor(uint8_t cursor_start, uint8_t cursor_end)
 {
-#ifdef console_cursor
 	outb(0x3D4, 0x0A);
 	outb(0x3D5, (inb(0x3D5) & 0xC0) | cursor_start);
 
 	outb(0x3D4, 0x0B);
 	outb(0x3D5, (inb(0x3D5) & 0xE0) | cursor_end);
-#endif // console_cursor
 }
 
 void terminal_disable_cursor()
 {
-#ifdef console_cursor
 	outb(0x3D4, 0x0A);
 	outb(0x3D5, 0x20);
-#endif // console_cursor
 }
 
 void terminal_update_cursor(int x, int y)
 {
-#ifdef console_cursor
 	uint16_t pos = y * VGA_WIDTH + x;
 
 	outb(0x3D4, 0x0F);
 	outb(0x3D5, (uint8_t) (pos & 0xFF));
 	outb(0x3D4, 0x0E);
 	outb(0x3D5, (uint8_t) ((pos >> 8) & 0xFF));
-#endif // console_cursor
 }
 
 void terminal_setcolor(uint8_t color)
@@ -99,12 +96,17 @@ void terminal_initialize(void)
 			terminal_buffer[index] = vga_entry(' ', terminal_color);
 		}
 	}
+#if !defined(vga_console) || !defined(console_cursor)
+	terminal_disable_cursor();
+#endif // !defined(vga_console) || !defined(console_cursor)
 }
 
 void terminal_putentryat(char c, uint8_t color, size_t x, size_t y)
 {
+#ifdef vga_console
 	const size_t index = y * VGA_WIDTH + x;
 	terminal_buffer[index] = vga_entry(c, color);
+#endif // vga_console
 }
 
 void terminal_putchar(char c)
@@ -116,12 +118,19 @@ void terminal_putchar(char c)
 			terminal_row = 0;
 		}
 	}
+#ifdef serial_console
+	write_serial(c);
+#endif // serial_console
 }
 
 void terminal_newline(void)
 {
 	terminal_row++;
 	terminal_column = 0;
+#ifdef serial_console
+	write_serial('\r');
+	write_serial('\n');
+#endif // serial_console
 }
 
 void terminal_backspace(void)
@@ -129,6 +138,9 @@ void terminal_backspace(void)
 	const size_t index = terminal_row * VGA_WIDTH + terminal_column - 1;
 	terminal_buffer[index] = vga_entry(' ', terminal_color);
 	terminal_column--;
+#ifdef serial_console
+	write_serial('\b');
+#endif // serial_console
 }
 
 void terminal_write_for_char(const char c)

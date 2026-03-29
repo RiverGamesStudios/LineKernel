@@ -5,10 +5,16 @@
 #define LineRenderer_DEFAULTFOREGROUND VGA_COLOR_LIGHT_GREY
 #define LineRenderer_DEFAULTBACKGROUND VGA_COLOR_BLACK
 
+/* Enable VGA console? */
+#define vga_console
+
 /* Define for keyboard support */
 #define ps2_keyboard
 
 /* Define for cursor in the console */
 #define console_cursor
+
+/* Enable serial? */
+#define serial_console
 
 #endif

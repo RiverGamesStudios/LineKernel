@@ -3,7 +3,7 @@ AS = i686-elf-as
 CFLAGS ?= -O2
 CFLAGS := $(CLFAGS) -std=gnu99 -ffreestanding -Wall -Wextra
 LDFLAGS = -T linker.ld -ffreestanding -O2 -nostdlib -lgcc
-OBJ = LineKernel.o boot.o LineRenderer.o ps2_keyboard.o bios_tools.o
+OBJ = LineKernel.o boot.o LineRenderer.o ps2_keyboard.o bios_tools.o serial.o
 
 all: LineKernel
 
@@ -13,8 +13,8 @@ run: all
 LineKernel: $(OBJ)
 	$(CC) -o LineKernel $(LDFLAGS) $(OBJ)
 
-LineKernel.o: LineKernel.c
-	$(CC) -c LineKernel.c -o LineKernel.o $(CFLAGS)
+%.o: %.c
+	$(CC) -c $< -o $@ $(CFLAGS)
 
 LineRenderer.o: LineRenderer.c
 	$(CC) -c LineRenderer.c -o LineRenderer.o $(CFLAGS)

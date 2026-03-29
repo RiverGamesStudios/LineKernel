@@ -26,10 +26,10 @@ void kernel_main(void)
 
 	terminal_writestring("Hello, LineKernel!\n");
 
-#ifdef ps2_keyboard
 	for (;;) {
+#ifdef ps2_keyboard
 		char c = keyboard_read_scancode_to_ascii();
 		terminal_write_for_char(c);
-	}
 #endif // ps2_keyboard
+	}
 }
