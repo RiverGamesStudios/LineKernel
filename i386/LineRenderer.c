@@ -135,21 +135,19 @@ void terminal_backspace(void)
 	terminal_column--;
 #ifdef serial_console
 	write_serial('\b');
+	write_serial(' ');
+	write_serial('\b');
 #endif // serial_console
 }
 
 void terminal_write_for_char(const char c)
 {
-	if (c == '\b') {
-		terminal_backspace();
-	}
-	else if (c == '\n') {
-		terminal_newline();
-	}
-	else if (c != 0) {
-		terminal_putchar(c);
-	}
+	if (c == '\b') terminal_backspace();
+	else if (c == '\n') terminal_newline();
+	else if (c != 0) terminal_putchar(c);
+#ifdef console_cursor
 	terminal_update_cursor(terminal_column, terminal_row);
+#endif
 }
 
 void terminal_write(const char* data, size_t size)

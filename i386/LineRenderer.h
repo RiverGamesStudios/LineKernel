@@ -15,6 +15,8 @@ void terminal_putchar(char c);
 
 void terminal_newline(void);
 
+void terminal_tab(void);
+
 void terminal_backspace(void);
 
 void terminal_write_for_char(const char data);

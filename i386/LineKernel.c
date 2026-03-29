@@ -45,6 +45,7 @@ void kernel_main(void)
 		ready = serial_received();
 		if (ready != 0) {
 			c = read_serial_right_now();
+			c = serial_sane_control_codes(c);
 			terminal_write_for_char(c);
 		}
 #endif // serial_console

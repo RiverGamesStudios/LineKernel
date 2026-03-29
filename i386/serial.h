@@ -11,6 +11,8 @@ char read_serial_right_now();
 
 char read_serial();
 
+char serial_sane_control_codes(const char c);
+
 int is_transmit_empty();
 
 void write_serial(char a);
