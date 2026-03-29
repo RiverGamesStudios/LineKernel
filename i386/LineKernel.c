@@ -41,12 +41,12 @@ void kernel_main(void)
 		}
 #endif // ps2_keyboard
 
-#ifdef ps2_keyboard
+#ifdef serial_console
 		ready = serial_received();
 		if (ready != 0) {
 			c = read_serial_right_now();
 			terminal_write_for_char(c);
 		}
-#endif // ps2_keyboard
+#endif // serial_console
 	}
 }
