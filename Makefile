@@ -12,6 +12,9 @@ check-i386:
 iso-i386:
 	cd i386; make iso
 
+run-iso-i386:
+	qemu-system-i386 -cdrom i386/LineKernel.iso
+
 clean:
 	cd i386; make clean
 
