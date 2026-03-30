@@ -1,4 +1,4 @@
-## LineCoreOS for x86, x86_64
+## LineCoreOS for x86(_64)
 LineCoreOS is an Operating System written from scratch to run on x86 and x86_64
 
 ## Philosophy
