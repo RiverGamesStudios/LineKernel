@@ -18,14 +18,13 @@ int is_kbd_ready_to_read()
 	return (!(inb(PS2_STATUS_PORT) & PS2_STATUS_OUTPUT_FULL));
 }
 
-void wait_kbd_read() 
+void wait_kbd_read()
 {
 	while (!(inb(PS2_STATUS_PORT) & PS2_STATUS_OUTPUT_FULL));
 }
 
 // i think phoenix also found a way to get eaten by a troll, but that seems less likely than the other two options
 // best regards,
-// the mindfucker
 
 void keyboard_init()
 {
