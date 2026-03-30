@@ -7,6 +7,7 @@
 #endif
 
 #include "config.h"
+#include "version.h"
 #include "LineRenderer.h"
 #ifdef ps2_keyboard
 #include "ps2_keyboard.h"
@@ -18,6 +19,9 @@
 void initialize_start(void)
 {
 	terminal_initialize();
+#ifdef verbose_log
+	terminal_writestring("LineRenderer initialized.\n");
+#endif // verbose_log
 #ifdef ps2_keyboard
 	keyboard_init();
 #endif // ps2_keyboard
@@ -27,7 +31,17 @@ void kernel_main(void)
 {
 	initialize_start();
 
+#ifdef verbose_log
+	terminal_writestring("Core services initialized.\n\n");
+#endif // verbose_log
+
+#ifdef verbose_log
+	we_are_running();
+#endif
+
+#ifdef verbose_log
 	terminal_writestring("Hello, LineKernel!\n");
+#endif // verbose_log
 
 	char c;
 	int ready;

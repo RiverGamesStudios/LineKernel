@@ -1,0 +1,21 @@
+#include "version.h"
+
+void we_are_running(void)
+{
+	terminal_writestring("We are currently running: ");
+	terminal_writestring("version " VERSION "\n");
+	terminal_writestring("Flags: ");
+#ifdef vga_console
+	terminal_writestring("vga_console ");
+#endif // vga_console
+#ifdef ps2_keyboard
+	terminal_writestring("ps2_keyboard ");
+#endif // vga_console
+#ifdef console_cursor
+	terminal_writestring("console_cursor ");
+#endif // console_cursor
+#ifdef serial_console
+	terminal_writestring("serial_console ");
+#endif // serial_console
+	terminal_writestring("\n\n");
+}

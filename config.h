@@ -8,6 +8,9 @@
 /* Enable VGA console? */
 #define vga_console
 
+/* Enable verbose boot log? */
+#define verbose_log
+
 /* Define for keyboard support */
 #define ps2_keyboard
 
