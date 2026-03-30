@@ -27,7 +27,7 @@ void kernel_main(void)
 {
 	initialize_start();
 
-	terminal_writestring("admin | LFS/users/admin @ linecoreos : "); // Mock prompt
+	terminal_writestring("Hello, LineKernel!\n");
 
 	char c;
 	int ready;
