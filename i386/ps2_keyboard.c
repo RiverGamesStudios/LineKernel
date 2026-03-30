@@ -6,6 +6,8 @@
 #include "ps2_keyboard.h"
 #include "bios_tools.h"
 
+static int is_shift_pressed = 0;
+
 void wait_kbd_write()
 {
 	while (inb(PS2_STATUS_PORT) & PS2_STATUS_INPUT_FULL);
@@ -16,10 +18,14 @@ int is_kbd_ready_to_read()
 	return (!(inb(PS2_STATUS_PORT) & PS2_STATUS_OUTPUT_FULL));
 }
 
-void wait_kbd_read()
+void wait_kbd_read() 
 {
 	while (!(inb(PS2_STATUS_PORT) & PS2_STATUS_OUTPUT_FULL));
 }
+
+// i think phoenix also found a way to get eaten by a troll, but that seems less likely than the other two options
+// best regards,
+// the mindfucker
 
 void keyboard_init()
 {
@@ -46,14 +52,32 @@ static const char ascii_table[] =
 	'\\', 'z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', '/', 0, '*', 0, ' '
 };
 
+static const char shift_ascii_table[] =
+{
+	0,  27, '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '+', '\b',
+	'\t', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', '{', '}', '\n',
+	0, 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', ':', '"', '~', 0,
+	'|', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', '<', '>', '?', 0, '*', 0, ' '
+};
+
 char keyboard_to_ascii(uint8_t scancode)
 {
+	if (scancode == 0x2A || scancode == 0x36) {
+		is_shift_pressed = 1;
+		return 0;
+	}
+
+	if (scancode == 0xAA || scancode == 0xB6) {
+		is_shift_pressed = 0;
+		return 0;
+	}
+
 	if (scancode & 0x80) {
 		return 0; 
 	}
 	
 	if (scancode < sizeof(ascii_table)) {
-		return ascii_table[scancode];
+		return is_shift_pressed ? shift_ascii_table[scancode] : ascii_table[scancode];
 	}
 	
 	return 0;
