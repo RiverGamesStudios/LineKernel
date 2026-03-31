@@ -1,4 +1,5 @@
 *.o
+*.gz
 LineKernel
 .env
 *.iso

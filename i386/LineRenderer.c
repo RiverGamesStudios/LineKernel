@@ -160,3 +160,15 @@ void terminal_writestring(const char* data)
 {
 	terminal_write(data, strlen(data));
 }
+
+void terminal_writeint(int data)
+{
+	if (data < 0) {
+		terminal_write_for_char('-');
+		data = -data;
+	}
+	if (data / 10) {
+		terminal_writeint(data / 10);
+	}
+	terminal_write_for_char((data % 10) + '0');
+}
