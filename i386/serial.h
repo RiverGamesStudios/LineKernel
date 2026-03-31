@@ -1,6 +1,8 @@
 #ifndef __SERIAL_H__
 #define __SERIAL_H__
 
+#include "bios_tools.h"
+
 #define PORT 0x3f8
 
 int init_serial();

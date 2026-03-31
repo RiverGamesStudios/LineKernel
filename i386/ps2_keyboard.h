@@ -1,6 +1,7 @@
 #ifndef __PS2_KEYBOARD_H__
 #define __PS2_KEYBOARD_H__
 
+#include "bios_tools.h"
 #include <stdint.h>
 
 #define PS2_DATA_PORT 0x60

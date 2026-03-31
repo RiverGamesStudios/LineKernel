@@ -4,7 +4,6 @@
 #include "config.h"
 #ifdef ps2_keyboard
 #include "ps2_keyboard.h"
-#include "bios_tools.h"
 
 static int is_shift_pressed = 0;
 

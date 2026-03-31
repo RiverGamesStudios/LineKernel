@@ -1,4 +1,3 @@
-#include "bios_tools.h"
 #include "serial.h"
 
 int init_serial()

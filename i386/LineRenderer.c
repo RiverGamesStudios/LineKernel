@@ -1,12 +1,4 @@
-#include "config.h"
 #include "LineRenderer.h"
-#include "bios_tools.h"
-#include <stddef.h>
-#include <stdint.h>
-#include "str.h"
-#ifdef serial_console
-#include "serial.h"
-#endif // serial_console
 
 enum vga_color {
 	VGA_COLOR_BLACK = 0,

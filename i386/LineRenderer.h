@@ -1,9 +1,14 @@
 #ifndef __LINERENDERER_H__
 #define __LINERENDERER_H__
 
-#include <stdbool.h>
+#include "config.h"
+#include "bios_tools.h"
 #include <stddef.h>
 #include <stdint.h>
+#include "str.h"
+#ifdef serial_console
+#include "serial.h"
+#endif // serial_console
 
 void terminal_initialize(void);
 
