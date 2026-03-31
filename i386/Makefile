@@ -31,6 +31,6 @@ iso: check
 	grub-mkrescue -o LineKernel.iso iso
 
 clean:
-	rm -r iso *.iso *.o LineKernel || true
+	rm -r iso *.iso *.o *.gz LineKernel || true
 
 .PHONY: clean all iso check
