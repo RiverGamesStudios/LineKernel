@@ -14,7 +14,7 @@ LineKernel: $(OBJ)
 	$(CC) -o LineKernel $(LDFLAGS) $(OBJ)
 
 LineKernel.gz: LineKernel
-	gzip -k LineKernel
+	gzip -9 -n -f -k LineKernel
 
 %.o: %.c
 	$(CC) -c $< -o $@ $(CFLAGS)

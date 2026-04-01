@@ -142,6 +142,11 @@ void terminal_write_for_char(const char c)
 #endif
 }
 
+void terminal_putc(int ch, void* stream)
+{
+	terminal_write_for_char(ch);
+}
+
 void terminal_write(const char* data, size_t size)
 {
 	for (size_t i = 0; i < size; i++)
