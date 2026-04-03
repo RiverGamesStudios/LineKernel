@@ -3,6 +3,7 @@
 
 #define NANOPRINTF_IMPLEMENTATION
 #include "third-party/nanoprintf.h"
+#include "LineRenderer.h"
 
 #define kprintf(...) npf_pprintf(&terminal_putc, NULL, __VA_ARGS__)
 
