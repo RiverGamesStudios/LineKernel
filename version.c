@@ -2,7 +2,7 @@
 
 void we_are_running(void)
 {
-	terminal_writestring("We are currently running: ");
+	terminal_writestring("We are running: ");
 	terminal_writestring("version " VERSION "\n");
 	terminal_writestring("Flags: ");
 #ifdef vga_console
@@ -17,5 +17,8 @@ void we_are_running(void)
 #ifdef serial_console
 	terminal_writestring("serial_console ");
 #endif // serial_console
+#ifdef ide
+	terminal_writestring("ide ");
+#endif // ide
 	terminal_writestring("\n\n");
 }

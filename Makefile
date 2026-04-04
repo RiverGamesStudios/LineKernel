@@ -10,10 +10,10 @@ check-i386:
 	cd i386; make check
 
 iso-i386:
-	cd i386; make iso
+	cd i386; make LineKernel.iso
 
-run-iso-i386: iso-i386
-	qemu-system-i386 -cdrom i386/LineKernel.iso
+run-iso-i386:
+	cd i386; make run-iso
 
 clean:
 	cd i386; make clean

@@ -3,12 +3,12 @@ AS = i686-elf-as
 CFLAGS ?= -O2
 CFLAGS := $(CLFAGS) -std=gnu99 -ffreestanding -Wall -Wextra
 LDFLAGS = -T linker.ld -ffreestanding -O2 -nostdlib -lgcc
-OBJ = LineKernel.o boot.o LineRenderer.o ps2_keyboard.o bios_tools.o serial.o str.o version.o
+OBJ = LineKernel.o boot.o LineRenderer.o ps2_keyboard.o bios_tools.o serial.o str.o version.o ide.o
 
 all: LineKernel LineKernel.gz
 
 run: all
-	qemu-system-i386 -kernel LineKernel
+	qemu-system-i386 -m 2G -kernel LineKernel $(DTYPE) $(DISK)
 
 LineKernel: $(OBJ)
 	$(CC) -o LineKernel $(LDFLAGS) $(OBJ)
@@ -25,10 +25,13 @@ boot.o: boot.s
 check: all
 	grub-file --is-x86-multiboot LineKernel
 
-iso: check
+LineKernel.iso: check
 	cp -r ../iso .
 	cp LineKernel.gz iso/boot/LineKernel.gz
 	grub-mkrescue -o LineKernel.iso iso
+
+run-iso: LineKernel.iso
+	qemu-system-i386 -cdrom LineKernel.iso $(DTYPE) $(DISK)
 
 clean:
 	rm -r iso *.iso *.o *.gz LineKernel || true

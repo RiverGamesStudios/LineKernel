@@ -9,6 +9,7 @@
 #include "config.h"
 #include "version.h"
 #include "LineRenderer.h"
+#include "ide.h"
 #ifdef ps2_keyboard
 #include "ps2_keyboard.h"
 #endif // ps2_keyboard
@@ -22,9 +23,23 @@ void initialize_start(void)
 #ifdef verbose_log
 	terminal_writestring("LineRenderer initialized.\n");
 #endif // verbose_log
+
 #ifdef ps2_keyboard
 	keyboard_init();
+#ifdef verbose_log
+	terminal_writestring("PS/2 keyboard controller initialized.\n");
+#endif // verbose_log
 #endif // ps2_keyboard
+
+#ifdef ide
+#ifdef verbose_log
+	terminal_writestring("Initializing PCI IDE Controller...\n");
+#endif // verbose_log
+	ide_initialize(0x1F0, 0x3F6, 0x170, 0x376, 0x000);
+#ifdef verbose_log
+	terminal_writestring("PCI IDE Controller initialized.\n");
+#endif // verbose_log
+#endif // ide
 }
 
 void kernel_main(void)
@@ -37,7 +52,7 @@ void kernel_main(void)
 
 #ifdef verbose_log
 	we_are_running();
-#endif
+#endif // verbose_log
 
 #ifdef verbose_log
 	terminal_writestring("Hello, LineKernel!\n");

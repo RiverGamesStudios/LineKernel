@@ -7,6 +7,9 @@
 #define LineRenderer_DEFAULTFOREGROUND VGA_COLOR_LIGHT_GREY
 #define LineRenderer_DEFAULTBACKGROUND VGA_COLOR_BLACK
 
+/* Enable PCI IDE controller? */
+#define ide
+
 /* Enable VGA console? */
 #define vga_console
 
