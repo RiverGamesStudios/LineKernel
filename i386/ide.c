@@ -308,7 +308,7 @@ unsigned int BAR4) {
 	// 4- Print Summary:
 	for (int i = 0; i < 4; i++)
 		if (ide_devices[i].Reserved == 1) {
-			printk(" Found %s Drive %dGB - %s\n",
+			printk("   Found %s Drive %dGB - %s\n",
 				(const char *[]){"ATA", "ATAPI"}[ide_devices[i].Type],         /* Type */
 				ide_devices[i].Size / 1024 / 1024 / 2,               /* Size */
 				ide_devices[i].Model);

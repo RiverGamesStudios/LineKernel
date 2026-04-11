@@ -2,8 +2,6 @@
 
 void we_are_running(void)
 {
-	terminal_writestring("We are running: ");
-	terminal_writestring("version " VERSION "\n");
 	terminal_writestring("Flags: ");
 #ifdef vga_console
 	terminal_writestring("vga_console ");

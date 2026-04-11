@@ -23,7 +23,8 @@ void wait_kbd_read()
 }
 
 // i think phoenix also found a way to get eaten by a troll, but that seems less likely than the other two options
-// best regards,
+// best regards, 
+// SAM
 
 void keyboard_init()
 {

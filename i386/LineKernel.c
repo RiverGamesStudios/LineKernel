@@ -9,6 +9,7 @@
 #include "config.h"
 #include "version.h"
 #include "LineRenderer.h"
+#include "version.h"
 #include "ide.h"
 #ifdef ps2_keyboard
 #include "ps2_keyboard.h"
@@ -21,6 +22,7 @@ void initialize_start(void)
 {
 	terminal_initialize();
 #ifdef verbose_log
+	terminal_writestring("Booting LineKernel v" VERSION "...\n\n");
 	terminal_writestring("LineRenderer initialized.\n");
 #endif // verbose_log
 
