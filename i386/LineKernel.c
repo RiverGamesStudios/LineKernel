@@ -22,7 +22,7 @@ void initialize_start(void)
 {
 	terminal_initialize();
 #ifdef verbose_log
-	terminal_writestring("Booting LineKernel v" VERSION "...\n\n");
+	terminal_writestring("Welcome to LineKernel v" VERSION ".\n\n");
 	terminal_writestring("LineRenderer initialized.\n");
 #endif // verbose_log
 
