@@ -18,4 +18,7 @@ run-iso-i386:
 clean:
 	cd i386; make clean
 
+trick:
+	@echo "fly!"
+
 .PHONY: all i386 run-i386 check-i386 iso-i386 clean
