@@ -304,7 +304,6 @@ unsigned int BAR4) {
 			count++;
 		}
 
-#ifdef verbose_log
 	// 4- Print Summary:
 	for (int i = 0; i < 4; i++)
 		if (ide_devices[i].Reserved == 1) {
@@ -313,7 +312,6 @@ unsigned int BAR4) {
 				ide_devices[i].Size / 1024 / 1024 / 2,               /* Size */
 				ide_devices[i].Model);
 		}
-#endif // verbose_log
 }
 
 int ide_is_device(int device)
