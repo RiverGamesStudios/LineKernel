@@ -9,6 +9,7 @@
 #include "config.h"
 #include "version.h"
 #include "LineRenderer.h"
+#include "RiverAdvice.h"
 #include "version.h"
 #include "ide.h"
 #ifdef ps2_keyboard
@@ -41,6 +42,8 @@ void kernel_main(void)
 	initialize_start();
 
 	terminal_writestring("Core services initialized.\n\n");
+	terminal_writestring("A word of advice: ");
+	river_words(7);
 	we_are_running();
 
 	char c;
