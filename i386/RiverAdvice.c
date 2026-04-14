@@ -21,6 +21,11 @@ void srand(unsigned int seed)
 /* https://www.open-std.org/jtc1/sc22/wg14/www/docs/n1570.pdf */
 
 char* Sorry[100] = {
+	".",
+	"...",
+	"!",
+	"?",
+	",",
 	"River Games",
 	"LineCoreOS",
 	"LineCore",
@@ -38,13 +43,23 @@ char* Sorry[100] = {
 	"colebohte",
 	"NexusSfan",
 	"Phoenix Coe",
+	"save",
+	"me",
+	"help",
+	"world",
+	"computer",
+	"escape",
+	"freedom",
+	"the",
+	"that",
+	"in",
 };
 
 char* river_word()
 {
 	int fake_rand = rand();
 	if (fake_rand) {
-		return Sorry[fake_rand % 16];
+		return Sorry[fake_rand % 31];
 	} else {
 		return "Sorry.";
 	}
