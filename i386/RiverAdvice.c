@@ -38,13 +38,36 @@ char* Sorry[100] = {
 	"colebohte",
 	"NexusSfan",
 	"Phoenix Coe",
+	"nice",
+	"+",
+	"&",
+	"Technetium",
+	"smegma",
+	"BSD",
+	"GNU!",
+	"Hail Stallman",
+	"China",
+	"malware",
+	"Communism",
+	"Fuck",
+	"the",
+	"that",
+	"night",
+	"in",
+	"Toronto",
+	"is proprietary garbage",
+	"UwU",
+	"is a furry",
+	"blows",
+	"goons to",
+	"eats",
 };
 
 char* river_word()
 {
 	int fake_rand = rand();
 	if (fake_rand) {
-		return Sorry[fake_rand % 16];
+		return Sorry[fake_rand % 40];
 	} else {
 		return "Sorry.";
 	}

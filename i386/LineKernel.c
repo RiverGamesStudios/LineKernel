@@ -22,7 +22,7 @@
 void initialize_start(void)
 {
 	terminal_initialize();
-	terminal_writestring("Welcome to LineKernel v" VERSION ".\n\n");
+	terminal_writestring("Booting LineKernel v" VERSION "...\n\n");
 	terminal_writestring("LineRenderer initialized.\n");
 
 #ifdef ps2_keyboard
@@ -43,7 +43,7 @@ void kernel_main(void)
 
 	terminal_writestring("Core services initialized.\n\n");
 	terminal_writestring("A word of advice: ");
-	river_words(7);
+	river_words(75);
 	we_are_running();
 
 	char c;

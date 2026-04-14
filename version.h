@@ -4,7 +4,7 @@
 #include "LineRenderer.h"
 
 // Versioning system: X.X.X.SLOC
-#define VERSION "0.1.0.983"
+#define VERSION "0.1.0.1083"
 
 void we_are_running();
 
