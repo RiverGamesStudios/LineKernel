@@ -10,6 +10,9 @@
 /* Enable PCI IDE controller? */
 #define ide
 
+/* Enable GPT partition table? */
+#define gpt
+
 /* Enable VGA console? */
 #define vga_console
 

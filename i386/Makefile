@@ -3,7 +3,7 @@ AS = i686-elf-as
 CFLAGS ?= -O2
 CFLAGS := $(CLFAGS) -std=gnu99 -ffreestanding -Wall -Wextra -Wpedantic
 LDFLAGS = -T linker.ld -ffreestanding -O2 -nostdlib
-OBJ = LineKernel.o boot.o LineRenderer.o ps2_keyboard.o bios_tools.o serial.o str.o version.o ide.o RiverAdvice.o
+OBJ = LineKernel.o boot.o LineRenderer.o ps2_keyboard.o bios_tools.o serial.o str.o version.o ide.o RiverAdvice.o printf.o gpt.o
 
 all: LineKernel LineKernel.gz
 

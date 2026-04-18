@@ -156,9 +156,10 @@ void terminal_write_for_char(const char c)
 #endif
 }
 
-void terminal_putc(int ch, void* stream)
+// needed for printf
+void _putchar(char character)
 {
-	terminal_write_for_char(ch);
+	terminal_write_for_char(character);
 }
 
 void terminal_write(const char* data, size_t size)

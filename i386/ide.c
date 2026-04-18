@@ -2,12 +2,10 @@
 
 #ifdef ide
 #include "ide.h"
-#define NANOPRINTF_IMPLEMENTATION
-#include "third-party/nanoprintf.h"
-#undef NANOPRINTF_IMPLEMENTATION
 #include "LineRenderer.h"
 
-#define printk(...) npf_pprintf(&terminal_putc, NULL, __VA_ARGS__)
+#include "third-party/printf.h"
+#define kprintf printf
 
 #define ATA_SR_BSY     0x80    // Busy
 #define ATA_SR_DRDY    0x40    // Drive ready
@@ -197,21 +195,21 @@ unsigned char ide_print_error(unsigned int drive, unsigned char err) {
 	if (err == 0)
 		return err;
 
-	printk("IDE:");
-	if (err == 1) {printk("- Device Fault\n     "); err = 19;}
+	kprintf("IDE:");
+	if (err == 1) {kprintf("- Device Fault\n     "); err = 19;}
 	else if (err == 2) {
 		unsigned char st = ide_read(ide_devices[drive].Channel, ATA_REG_ERROR);
-		if (st & ATA_ER_AMNF)   {printk("- No Address Mark Found\n     ");   err = 7;}
-		if (st & ATA_ER_TK0NF)   {printk("- No Media or Media Error\n     ");   err = 3;}
-		if (st & ATA_ER_ABRT)   {printk("- Command Aborted\n     ");      err = 20;}
-		if (st & ATA_ER_MCR)   {printk("- No Media or Media Error\n     ");   err = 3;}
-		if (st & ATA_ER_IDNF)   {printk("- ID mark not Found\n     ");      err = 21;}
-		if (st & ATA_ER_MC)   {printk("- No Media or Media Error\n     ");   err = 3;}
-		if (st & ATA_ER_UNC)   {printk("- Uncorrectable Data Error\n     ");   err = 22;}
-		if (st & ATA_ER_BBK)   {printk("- Bad Sectors\n     ");       err = 13;}
-	} else  if (err == 3)           {printk("- Reads Nothing\n     "); err = 23;}
-	  else  if (err == 4)  {printk("- Write Protected\n     "); err = 8;}
-	printk("- [%s %s] %s\n",
+		if (st & ATA_ER_AMNF)   {kprintf("- No Address Mark Found\n     ");   err = 7;}
+		if (st & ATA_ER_TK0NF)   {kprintf("- No Media or Media Error\n     ");   err = 3;}
+		if (st & ATA_ER_ABRT)   {kprintf("- Command Aborted\n     ");      err = 20;}
+		if (st & ATA_ER_MCR)   {kprintf("- No Media or Media Error\n     ");   err = 3;}
+		if (st & ATA_ER_IDNF)   {kprintf("- ID mark not Found\n     ");      err = 21;}
+		if (st & ATA_ER_MC)   {kprintf("- No Media or Media Error\n     ");   err = 3;}
+		if (st & ATA_ER_UNC)   {kprintf("- Uncorrectable Data Error\n     ");   err = 22;}
+		if (st & ATA_ER_BBK)   {kprintf("- Bad Sectors\n     ");       err = 13;}
+	} else  if (err == 3)           {kprintf("- Reads Nothing\n     "); err = 23;}
+	  else  if (err == 4)  {kprintf("- Write Protected\n     "); err = 8;}
+	kprintf("- [%s %s] %s\n",
 		(const char *[]){"Primary", "Secondary"}[ide_devices[drive].Channel], // Use the channel as an index into the array
 		(const char *[]){"Master", "Slave"}[ide_devices[drive].Drive], // Same as above, using the drive
 		ide_devices[drive].Model);
@@ -307,7 +305,7 @@ unsigned int BAR4) {
 	// 4- Print Summary:
 	for (int i = 0; i < 4; i++)
 		if (ide_devices[i].Reserved == 1) {
-			printk("   Found %s Drive %dGB - %s\n",
+			kprintf("   Found %s Drive %dGB - %s\n",
 				(const char *[]){"ATA", "ATAPI"}[ide_devices[i].Type],         /* Type */
 				ide_devices[i].Size / 1024 / 1024 / 2,               /* Size */
 				ide_devices[i].Model);
