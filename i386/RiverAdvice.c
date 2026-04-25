@@ -8,16 +8,17 @@
 /* https://www.open-std.org/jtc1/sc22/wg14/www/docs/n1570.pdf */
 static unsigned long int next = 'L' + 'I' + 'N' + 'E' + 'C' + 'O' + 'R' + 'E';
 
-int rand(void) // RAND_MAX assumed to be 32767
+int rand(void)					// RAND_MAX assumed to be 32767
 {
-    next = next * 1103515245 + 12345;
-    return (unsigned int)(next/65536) % 32768;
+	next = next * 1103515245 + 12345;
+	return (unsigned int)(next / 65536) % 32768;
 }
 
 void srand(unsigned int seed)
 {
-    next = seed;
+	next = seed;
 }
+
 /* https://www.open-std.org/jtc1/sc22/wg14/www/docs/n1570.pdf */
 
 char* Sorry[100] = {
@@ -58,6 +59,7 @@ char* Sorry[100] = {
 char* river_word()
 {
 	int fake_rand = rand();
+
 	if (fake_rand) {
 		return Sorry[fake_rand % 31];
 	} else {

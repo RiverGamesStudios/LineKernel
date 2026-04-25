@@ -36,7 +36,7 @@ static inline uint16_t vga_entry(unsigned char uc, uint8_t color)
 size_t terminal_row;
 size_t terminal_column;
 uint8_t terminal_color;
-uint16_t* terminal_buffer = (uint16_t*)VGA_MEMORY;
+uint16_t* terminal_buffer = (uint16_t *) VGA_MEMORY;
 
 void terminal_enable_cursor(uint8_t cursor_start, uint8_t cursor_end)
 {
@@ -72,11 +72,13 @@ void terminal_initialize(void)
 {
 	terminal_row = 0;
 	terminal_column = 0;
-	terminal_setcolor(vga_entry_color(LineRenderer_DEFAULTFOREGROUND, LineRenderer_DEFAULTBACKGROUND));
-	
+	terminal_setcolor(vga_entry_color(LineRenderer_DEFAULTFOREGROUND,
+			LineRenderer_DEFAULTBACKGROUND));
+
 	for (size_t y = 0; y < VGA_HEIGHT; y++) {
 		for (size_t x = 0; x < VGA_WIDTH; x++) {
 			const size_t index = y * VGA_WIDTH + x;
+
 			terminal_buffer[index] = vga_entry(' ', terminal_color);
 		}
 	}
@@ -92,6 +94,7 @@ void terminal_putentryat(char c, uint8_t color, size_t x, size_t y)
 {
 #ifdef vga_console
 	const size_t index = y * VGA_WIDTH + x;
+
 	terminal_buffer[index] = vga_entry(c, color);
 #endif // vga_console
 }
@@ -123,6 +126,7 @@ void terminal_newline(void)
 void terminal_backspace(void)
 {
 	const size_t index = terminal_row * VGA_WIDTH + terminal_column - 1;
+
 	terminal_buffer[index] = vga_entry(' ', terminal_color);
 	terminal_column--;
 #ifdef serial_console
@@ -148,9 +152,12 @@ void terminal_backspace(void)
 
 void terminal_write_for_char(const char c)
 {
-	if (c == '\b') terminal_backspace();
-	else if (c == '\n') terminal_newline();
-	else if (c != 0) terminal_putchar(c);
+	if (c == '\b')
+		terminal_backspace();
+	else if (c == '\n')
+		terminal_newline();
+	else if (c != 0)
+		terminal_putchar(c);
 #ifdef console_cursor
 	terminal_update_cursor(terminal_column, terminal_row);
 #endif

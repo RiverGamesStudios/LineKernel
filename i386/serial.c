@@ -12,7 +12,7 @@ int init_serial()
 	outb(PORT + 4, 0x1E);
 	outb(PORT + 0, 0xAE);
 
-	if(inb(PORT + 0) != 0xAE) {
+	if (inb(PORT + 0) != 0xAE) {
 		return 1;
 	}
 
@@ -27,8 +27,10 @@ int serial_received()
 
 char serial_sane_control_codes(const char c)
 {
-	if (c == '\r') return '\n';
-	else return c;
+	if (c == '\r')
+		return '\n';
+	else
+		return c;
 }
 
 char read_serial_right_now()
@@ -52,5 +54,5 @@ void write_serial(char a)
 {
 	while (is_transmit_empty() == 0);
 
-	outb(PORT,a);
+	outb(PORT, a);
 }
