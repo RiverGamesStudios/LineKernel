@@ -1,9 +1,10 @@
-## LineKernel
-LineKernel is the LineCoreOS kernel.
+## <img src="https://colebohte.github.io/fs/LK_COLOUR.png" alt="drawing" width="512"/>
+LineKernel is a kernel unlike any other UNIX-Like kernel. LineKernel is a Monolithic kernel designed for x86(_64) built from scratch for the [LineCore Operating System](https://wiki.rivergames.ca/wiki/LineCoreOS).
 
-It is a kernel unlike POSIX, DOS, or NT.
+This kernel is for the LineCoreOS [x86(_64)](https://wiki.rivergames.ca/wiki/History_of_LineCoreOS#x86) version.
 
-This kernel is for the LineCoreOS [x86](https://wiki.rivergames.ca/wiki/History_of_LineCoreOS#x86) version (not Post-Warpix or Pre-Warpix).
+### Features in Development
+- Kernel
 
 ## Compiling
 ### Dependencies
@@ -16,4 +17,4 @@ This kernel is for the LineCoreOS [x86](https://wiki.rivergames.ca/wiki/History_
     + `make iso-i386` - Make a bootable i386 ISO
     + `make run-iso-i386` - Run the i386 ISO in QEMU (slower, but more similar to running on real hardware)
 
-x86_64 and other arches are ***not*** supported yet.
+x86_64 and other architectures are ***<u>not</u>*** supported ***<u>yet</u>***.
