@@ -1,7 +1,7 @@
 #include "config.h"
 
-#ifdef ide
 #ifdef gpt
+#ifdef ide
 #include "gpt.h"
 #include "ide.h"
 #include "third-party/printf.h"
