@@ -1,21 +1,37 @@
-all:
+ARCH ?= i386
+include $(ARCH)/Makefile
 
-i386:
-	cd i386; make
+include kernel/Makefile
+CFLAGS ?= -O2
+CFLAGS := $(CLFAGS) -Ikernel -Ithird-party -DARCH_$(ARCH) -DARCH=\"$(ARCH)\" -std=gnu99 -ffreestanding -Wall -Wextra -Wpedantic
+OBJ = $(ARCH_OBJ) $(KERNEL_OBJ)
 
-run-i386:
-	cd i386; make run
+all: LineKernel LineKernel.gz
 
-check-i386:
-	cd i386; make check
+# todo: remove -lgcc
+LineKernel: $(OBJ)
+	$(CC) -o LineKernel $(LDFLAGS) $(OBJ) -lgcc
 
-iso-i386:
-	cd i386; make LineKernel.iso
+LineKernel.gz: LineKernel
+	gzip -9 -n -f -k LineKernel
 
-run-iso-i386:
-	cd i386; make run-iso
+%.o: %.c
+	$(CC) -c $< -o $@ $(CFLAGS)
+
+%.o: %.s
+	$(AS) $< -o $@
+
+run: all
+	$(QEMU) -m 2G -kernel LineKernel $(DTYPE) $(DISK)
+
+LineKernel.iso:
+	cp -r ../iso .
+	cp LineKernel.gz iso/boot/LineKernel.gz
+	grub-mkrescue -o LineKernel.iso iso
+	rm -r ./iso
+
+run-iso: LineKernel.iso
+	$(QEMU) -cdrom LineKernel.iso $(DTYPE) $(DISK)
 
 clean:
-	cd i386; make clean
-
-.PHONY: all i386 run-i386 check-i386 iso-i386 clean
+	rm -f LineKernel LineKernel.gz $(OBJ)

@@ -1,11 +1,4 @@
-#if defined(__linux__) || defined(__GNU__)
-#error "Not cross-compiling!!!"
-#endif
-
-#if !defined(__i386__)
-#error "Only compiles for i386!!!"
-#endif
-
+#include "kernelcheck.h"
 #include "config.h"
 #include "version.h"
 #include "LineRenderer.h"

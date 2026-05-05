@@ -1,5 +1,7 @@
 #ifndef __IDE_H__
 #define __IDE_H__
+#include "config.h"
+#ifdef ide
 #include "bios_tools.h"
 
 void ide_write(unsigned char channel, unsigned char reg, unsigned char data);
@@ -28,4 +30,5 @@ const char* ide_access_device_ata_pi(int device);
 unsigned char* ide_access_device_model(int device);
 char read_package0_error();
 
+#endif
 #endif

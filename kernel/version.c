@@ -18,5 +18,7 @@ void we_are_running(void)
 #ifdef ide
 	terminal_writestring("ide ");
 #endif // ide
+	terminal_writestring("\n");
+	terminal_writestring("Target: " ARCH);
 	terminal_writestring("\n\n");
 }

@@ -4,7 +4,7 @@
 #include "ide.h"
 #include "LineRenderer.h"
 
-#include "third-party/printf.h"
+#include "printf.h"
 #define kprintf printf
 
 #define ATA_SR_BSY     0x80		// Busy
@@ -86,8 +86,8 @@ struct IDEChannelRegisters {
 } channels[2];
 unsigned char ide_buf[2048] = { 0 };
 
-volatile unsigned static char ide_irq_invoked = 0;
-unsigned static char atapi_packet[12] = { 0xA8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+static volatile unsigned char ide_irq_invoked = 0;
+static unsigned char atapi_packet[12] = { 0xA8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
 struct ide_device {
 	unsigned char Reserved;		// 0 (Empty) or 1 (This Drive really exists).
@@ -504,7 +504,7 @@ unsigned char ide_ata_access(unsigned char direction, unsigned char drive, unsig
 			asm("popw %ds");
 			edi += (words * 2);
 		}
-		ide_write(channel, ATA_REG_COMMAND, (char[]) { ATA_CMD_CACHE_FLUSH,
+		ide_write(channel, ATA_REG_COMMAND, (int[]) { ATA_CMD_CACHE_FLUSH,
 				ATA_CMD_CACHE_FLUSH,
 				ATA_CMD_CACHE_FLUSH_EXT
 			}[lba_mode]);
@@ -571,7 +571,7 @@ unsigned char ide_atapi_read(unsigned char drive, unsigned int lba, unsigned cha
 
 	// (VII): Waiting for the driver to finish or return an error code:
 	// ------------------------------------------------------------------
-	if (err = ide_polling(channel, 1))
+	if ((err = ide_polling(channel, 1)))
 		return err;				// Polling and return if error.
 
 	// (VIII): Sending the packet data:
@@ -582,7 +582,7 @@ unsigned char ide_atapi_read(unsigned char drive, unsigned int lba, unsigned cha
 	// ------------------------------------------------------------------
 	for (i = 0; i < numsects; i++) {
 		ide_wait_irq();			// Wait for an IRQ.
-		if (err = ide_polling(channel, 1))
+		if ((err = ide_polling(channel, 1)))
 			return err;			// Polling and return if error.
 		asm("pushw %es");
 		asm("mov %%ax, %%es"::"a"(selector));

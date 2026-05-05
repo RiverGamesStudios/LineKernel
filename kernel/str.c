@@ -1,5 +1,5 @@
 #include "str.h"
-#include "third-party/strlcpy.c"
+#include "strlcpy.c"
 
 size_t strlen(const char* str)
 {
@@ -14,7 +14,7 @@ size_t strconcat(char* destination, const char* source, size_t size)
 {
 	char* ptr = destination + strlen(destination);
 
-	while (ptr - destination < size - 1 && *source) {
+	while (ptr - destination < (long int)size - 1 && *source) {
 		*ptr = *source;
 		ptr++;
 		source++;

@@ -4,7 +4,7 @@
 #ifdef ide
 #include "gpt.h"
 #include "ide.h"
-#include "third-party/printf.h"
+#include "printf.h"
 #define kprintf printf
 
 typedef struct {
