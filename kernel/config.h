@@ -23,10 +23,4 @@
 /* Define for keyboard support */
 #define ps2_keyboard
 
-/* Define for cursor in the console */
-#define console_cursor
-
-/* Enable serial? */
-#define serial_console
-
 #endif

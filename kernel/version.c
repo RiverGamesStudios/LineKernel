@@ -9,12 +9,6 @@ void we_are_running(void)
 #ifdef ps2_keyboard
 	terminal_writestring("ps2_keyboard ");
 #endif // vga_console
-#ifdef console_cursor
-	terminal_writestring("console_cursor ");
-#endif // console_cursor
-#ifdef serial_console
-	terminal_writestring("serial_console ");
-#endif // serial_console
 #ifdef ide
 	terminal_writestring("ide ");
 #endif // ide

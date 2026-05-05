@@ -38,9 +38,6 @@ void terminal_initialize(void)
 #ifdef serial_console
 	init_serial();
 #endif // serial_console
-#if !defined(vga_console) || !defined(console_cursor)
-	terminal_disable_cursor();
-#endif // !defined(vga_console) || !defined(console_cursor)
 }
 
 void terminal_putchar(char c)
@@ -98,9 +95,7 @@ void terminal_write_for_char(const char c)
 		terminal_newline();
 	else if (c != 0)
 		terminal_putchar(c);
-#ifdef console_cursor
 	terminal_update_cursor(terminal_column, terminal_row);
-#endif
 }
 
 // needed for printf

@@ -1,7 +1,6 @@
 #ifndef __SERIAL_H__
 #define __SERIAL_H__
 #include "config.h"
-#ifdef serial_console
 
 #include "bios_tools.h"
 
@@ -21,5 +20,4 @@ int is_transmit_empty();
 
 void write_serial(char a);
 
-#endif
 #endif
