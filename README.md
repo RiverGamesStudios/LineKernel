@@ -9,6 +9,7 @@ This kernel is for the LineCoreOS [x86(_64)](https://wiki.rivergames.ca/wiki/His
 ## Compiling
 ### Dependencies
 + [Cross-compile a GCC](https://wiki.osdev.org/GCC_Cross-Compiler) for the architecture needed (for `i386` it would be `i686-elf`).
++ `QEMU`
 
 ### Makefile Configurations
 + **For i386**
