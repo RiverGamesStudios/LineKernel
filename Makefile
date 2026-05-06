@@ -3,7 +3,7 @@ include $(ARCH)/Makefile
 
 include kernel/Makefile
 CFLAGS ?= -O2
-CFLAGS := $(CLFAGS) -Ikernel -Ithird-party -DARCH_$(ARCH) -DARCH=\"$(ARCH)\" -std=gnu99 -ffreestanding -Wall -Wextra -Wpedantic
+CFLAGS := $(CLFAGS) -Ikernel -Ithird-party -I$(ARCH) -DARCH_$(ARCH) -DARCH=\"$(ARCH)\" -std=gnu99 -ffreestanding -Wall -Wextra -Wpedantic
 OBJ = $(ARCH_OBJ) $(KERNEL_OBJ)
 
 all: LineKernel LineKernel.gz

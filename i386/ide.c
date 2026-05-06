@@ -486,7 +486,7 @@ unsigned char ide_ata_access(unsigned char direction, unsigned char drive, unsig
 	else if (direction == 0)
 		// PIO Read.
 		for (i = 0; i < numsects; i++) {
-			if (err = ide_polling(channel, 1))
+			if ((err = ide_polling(channel, 1)))
 				return err;		// Polling, set error and exit if there is.
 			asm("pushw %es");
 		  asm("mov %%ax, %%es": :"a"(selector));
