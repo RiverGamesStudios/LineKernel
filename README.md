@@ -1,5 +1,5 @@
-## [<img src="https://colebohte.github.io/fs/LK_COLOUR.png" alt="drawing" width="512"/>](https://linecoreos.rivergames.ca/articles/linekernel)
-[LineKernel](https://linecoreos.rivergames.ca/articles/linekernel) is a kernel unlike any other UNIX-Like kernel. LineKernel is a Monolithic kernel designed for x86(_64) built from scratch for the [LineCore Operating System](https://wiki.rivergames.ca/wiki/LineCoreOS).
+## [<img src="https://colebohte.github.io/fs/LK_COLOUR.png" alt="drawing" width="512"/>](https://wiki.rivergames.ca/wiki/LineKernel)
+[LineKernel](https://wiki.rivergames.ca/wiki/LineKernel) is a kernel unlike any other UNIX-Like kernel. LineKernel is a Monolithic kernel designed for x86(_64) built from scratch for the [LineCore Operating System](https://wiki.rivergames.ca/wiki/LineCoreOS).
 
 This kernel is for the LineCoreOS [x86(_64)](https://wiki.rivergames.ca/wiki/History_of_LineCoreOS#x86) version.
 
@@ -9,7 +9,7 @@ This kernel is for the LineCoreOS [x86(_64)](https://wiki.rivergames.ca/wiki/His
 ## Compiling
 ### Dependencies
 + [Cross-compile a GCC](https://wiki.osdev.org/GCC_Cross-Compiler) for the architecture needed (for `i386` it would be `i686-elf`).
-+ `QEMU`
++ QEMU
 
 ### Makefile Configurations
 + **For i386**
