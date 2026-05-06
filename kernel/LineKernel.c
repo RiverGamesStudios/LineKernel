@@ -1,5 +1,4 @@
 #include "kernelcheck.h"
-#include "config.h"
 #include "version.h"
 #include "LineRenderer.h"
 #include "RiverAdvice.h"
