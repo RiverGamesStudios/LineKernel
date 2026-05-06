@@ -19,3 +19,5 @@ This kernel is for the LineCoreOS [x86(_64)](https://wiki.rivergames.ca/wiki/His
     + `make run-iso-i386` - Run the i386 ISO in QEMU (slower, but more similar to running on real hardware)
 
 x86_64 and other architectures are ***<u>not</u>*** supported ***<u>yet</u>***.
+
+<sup>(c) 2026 River Games Studios ~ LineKernel (Project Estuary)</sup>
