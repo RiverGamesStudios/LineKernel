@@ -1,5 +1,7 @@
 #ifndef __PS2_KEYBOARD_H__
 #define __PS2_KEYBOARD_H__
+#include "config.h"
+#ifdef ps2_keyboard
 
 #include "bios_tools.h"
 #include <stdint.h>
@@ -25,4 +27,5 @@ char keyboard_read_scancode_to_ascii();
 char keyboard_read_scancode_to_ascii_right_now();
 int is_kbd_ready_to_read();
 
+#endif
 #endif

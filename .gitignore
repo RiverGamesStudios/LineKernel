@@ -5,3 +5,5 @@ LineKernel
 *.iso
 */iso
 *.qcow2
+docs/html
+docs/man
