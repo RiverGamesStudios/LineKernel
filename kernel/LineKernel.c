@@ -12,9 +12,9 @@
 #ifdef CONFIG_SERIAL_CONSOLE
 #include "serial.h"
 #endif
-
-int ready_to_read_uart(void);
-char get_uart_input(void);
+#ifdef CONFIG_UART
+#include "uart.h"
+#endif
 
 void initialize_start(void)
 {

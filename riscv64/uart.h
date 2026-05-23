@@ -8,8 +8,10 @@
 
 #include <stdint.h>
 #include <stddef.h>
-void uart_putchar(char c);
 void uart_init();
+void uart_putchar(char c);
+char get_uart_input(void);
+char read_uart(void);
 
 #endif
 #endif
