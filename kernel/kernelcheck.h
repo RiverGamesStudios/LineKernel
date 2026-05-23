@@ -6,4 +6,4 @@
 #error "Only compiles for i386!!!"
 #endif
 
-#include "config.h"
+#include "kconfig.h"

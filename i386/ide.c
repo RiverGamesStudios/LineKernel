@@ -1,6 +1,6 @@
-#include "config.h"
+#include "kconfig.h"
 
-#ifdef ide
+#ifdef CONFIG_IDE
 #include "ide.h"
 #include "LineRenderer.h"
 
@@ -730,4 +730,4 @@ void ide_atapi_eject(unsigned char drive)
 	}
 }
 
-#endif // ide
+#endif

@@ -1,5 +1,5 @@
 #include "vga_console.h"
-#ifdef vga_console
+#ifdef CONFIG_VGA_CONSOLE
 
 enum vga_color {
 	VGA_COLOR_BLACK = 0,
@@ -54,7 +54,7 @@ void vga_terminal_disable_cursor()
 
 void vga_terminal_update_cursor(int x, int y)
 {
-	uint16_t pos = y * TERM_WIDTH + x;
+	uint16_t pos = y * 80 + x;
 
 	outb(0x3D4, 0x0F);
 	outb(0x3D5, (uint8_t) (pos & 0xFF));
@@ -68,12 +68,12 @@ void vga_terminal_initialize(void)
 {
 	terminal_row = 0;
 	terminal_column = 0;
-	terminal_setcolor(vga_entry_color(TERM_DEFAULTFOREGROUND,
-			TERM_DEFAULTBACKGROUND));
+	terminal_setcolor(vga_entry_color(VGA_COLOR_LIGHT_GREY,
+			VGA_COLOR_BLACK));
 
-	for (size_t y = 0; y < TERM_HEIGHT; y++) {
-		for (size_t x = 0; x < TERM_WIDTH; x++) {
-			const size_t index = y * TERM_WIDTH + x;
+	for (size_t y = 0; y < 25; y++) {
+		for (size_t x = 0; x < 80; x++) {
+			const size_t index = y * 80 + x;
 
 			vga_terminal_buffer[index] = vga_entry(' ', terminal_color);
 		}
@@ -82,7 +82,7 @@ void vga_terminal_initialize(void)
 
 void vga_terminal_putentryat(char c, uint8_t color, size_t x, size_t y)
 {
-	const size_t index = y * TERM_WIDTH + x;
+	const size_t index = y * 80 + x;
 
 	vga_terminal_buffer[index] = vga_entry(c, color);
 }
@@ -90,9 +90,9 @@ void vga_terminal_putentryat(char c, uint8_t color, size_t x, size_t y)
 void vga_terminal_putchar(char c)
 {
 	vga_terminal_putentryat(c, terminal_color, terminal_column, terminal_row);
-	if (++terminal_column == TERM_WIDTH) {
+	if (++terminal_column == 80) {
 		terminal_column = 0;
-		if (++terminal_row == TERM_HEIGHT) {
+		if (++terminal_row == 25) {
 			terminal_row = 0;
 		}
 	}
@@ -106,7 +106,7 @@ void vga_terminal_newline(void)
 
 void vga_terminal_backspace(void)
 {
-	const size_t index = terminal_row * TERM_WIDTH + terminal_column - 1;
+	const size_t index = terminal_row * 80 + terminal_column - 1;
 
 	vga_terminal_buffer[index] = vga_entry(' ', terminal_color);
 	terminal_column--;

@@ -7,3 +7,7 @@ LineKernel
 *.qcow2
 docs/html
 docs/man
+.config
+.config.old
+/Kconfig
+kconfig.h

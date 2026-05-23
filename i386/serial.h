@@ -1,6 +1,6 @@
 #ifndef __SERIAL_H__
 #define __SERIAL_H__
-#include "config.h"
+#include "kconfig.h"
 
 #include "bios_tools.h"
 

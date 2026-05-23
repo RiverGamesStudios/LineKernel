@@ -1,7 +1,7 @@
 #ifndef __VGA_CONSOLE_H__
 #define __VGA_CONSOLE_H__
-#include "config.h"
-#ifdef vga_console
+#include "kconfig.h"
+#ifdef CONFIG_VGA_CONSOLE
 
 #include <stdint.h>
 #include <stddef.h>

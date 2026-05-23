@@ -6,23 +6,23 @@ uint8_t terminal_color;
 
 void terminal_enable_cursor(uint8_t cursor_start, uint8_t cursor_end)
 {
-#ifdef vga_console
+#ifdef CONFIG_VGA_CONSOLE
 	vga_terminal_enable_cursor(cursor_start, cursor_end);
-#endif // vga_console
+#endif
 }
 
 void terminal_disable_cursor()
 {
-#ifdef vga_console
+#ifdef CONFIG_VGA_CONSOLE
 	vga_terminal_disable_cursor();
-#endif // vga_console
+#endif
 }
 
 void terminal_update_cursor(int x, int y)
 {
-#ifdef vga_console
+#ifdef CONFIG_VGA_CONSOLE
 	vga_terminal_update_cursor(x, y);
-#endif // vga_console
+#endif
 }
 
 void terminal_setcolor(uint8_t color)
@@ -32,41 +32,41 @@ void terminal_setcolor(uint8_t color)
 
 void terminal_initialize(void)
 {
-#ifdef vga_console
+#ifdef CONFIG_VGA_CONSOLE
 	vga_terminal_initialize();
-#endif // vga_console
-#ifdef serial_console
+#endif
+#ifdef CONFIG_SERIAL_CONSOLE
 	init_serial();
-#endif // serial_console
+#endif
 }
 
 void terminal_putchar(char c)
 {
-#ifdef vga_console
+#ifdef CONFIG_VGA_CONSOLE
 	vga_terminal_putchar(c);
-#endif // vga_console
-#ifdef serial_console
+#endif
+#ifdef CONFIG_SERIAL_CONSOLE
 	write_serial(c);
-#endif // serial_console
+#endif
 }
 
 void terminal_newline(void)
 {
-#ifdef vga_console
+#ifdef CONFIG_VGA_CONSOLE
 	vga_terminal_newline();
-#endif // vga_console
-#ifdef serial_console
+#endif
+#ifdef CONFIG_SERIAL_CONSOLE
 	write_serial('\r');
 	write_serial('\n');
-#endif // serial_console
+#endif
 }
 
 void terminal_backspace(void)
 {
-#ifdef vga_console
+#ifdef CONFIG_VGA_CONSOLE
 	vga_terminal_backspace();
-#endif // vga_console
-#ifdef serial_console
+#endif
+#ifdef CONFIG_SERIAL_CONSOLE
 	write_serial('\b');
 	write_serial(' ');
 	write_serial('\b');
@@ -84,7 +84,7 @@ void terminal_backspace(void)
 		write_serial('9');
 		write_serial('C');
 	}
-#endif // serial_console
+#endif
 }
 
 void terminal_write_for_char(const char c)

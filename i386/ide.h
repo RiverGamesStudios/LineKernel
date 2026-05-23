@@ -1,7 +1,7 @@
 #ifndef __IDE_H__
 #define __IDE_H__
-#include "config.h"
-#ifdef ide
+#include "kconfig.h"
+#ifdef CONFIG_VGA_CONSOLE
 #include "bios_tools.h"
 
 void ide_write(unsigned char channel, unsigned char reg, unsigned char data);

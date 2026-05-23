@@ -1,15 +1,31 @@
+VERSION = 0.1.0.983
+
 ARCH ?= i386
 include $(ARCH)/Makefile
 
 include kernel/Makefile
 CFLAGS ?= -O2
-CFLAGS := $(CLFAGS) -Ikernel -Ithird-party -I$(ARCH) -DARCH_$(ARCH) -DARCH=\"$(ARCH)\" -std=gnu99 -ffreestanding -Wall -Wextra -Wpedantic
+CFLAGS := $(CLFAGS) -Ikernel -Ithird-party -I$(ARCH) -DARCH_$(ARCH) -DARCH=\"$(ARCH)\" -DVERSION=\"$(VERSION)\" -std=gnu99 -ffreestanding -Wall -Wextra -Wpedantic
 OBJ = $(ARCH_OBJ) $(KERNEL_OBJ)
 
 all: LineKernel LineKernel.gz
 
+kernel/kconfig.h: .config
+	python3 ./tools/config2header.py .config > kernel/kconfig.h
+
+Kconfig: Kconfig.template
+	cp Kconfig.template Kconfig
+	sed -i "s/{ARCH}/$(ARCH)/g" Kconfig
+	sed -i "s/{VERSION}/$(VERSION)/g" Kconfig
+
+menuconfig: Kconfig
+	kconfig-mconf Kconfig
+
+xconfig: Kconfig
+	kconfig-qconf Kconfig
+
 # todo: remove -lgcc
-LineKernel: $(OBJ)
+LineKernel: kernel/kconfig.h $(OBJ)
 	$(CC) -o LineKernel $(LDFLAGS) $(OBJ) -lgcc
 
 LineKernel.gz: LineKernel
@@ -34,4 +50,7 @@ run-iso: LineKernel.iso
 	$(QEMU) -cdrom LineKernel.iso $(DTYPE) $(DISK)
 
 clean:
-	rm -f LineKernel LineKernel.gz $(OBJ)
+	rm -f LineKernel LineKernel.gz $(OBJ) kernel/kconfig.h
+
+distclean: clean
+	rm -rf Kconfig .config .config.old kernel/LineKernel.qcow2 docs/

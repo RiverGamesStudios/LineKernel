@@ -1,7 +1,7 @@
-#include "config.h"
+#include "kconfig.h"
 
-#ifdef gpt
-#ifdef ide
+#ifdef CONFIG_GPT
+#ifdef CONFIG_IDE
 #include "gpt.h"
 #include "ide.h"
 #include "printf.h"

@@ -1,7 +1,5 @@
 #include "bios_tools.h"
 
-#ifdef ARCH_i386
-
 uint8_t inb(uint16_t port)
 {
 	uint8_t ret;
@@ -27,5 +25,3 @@ void insl(int port, uint32_t addr, int cnt)
 	asm volatile ("cld; rep insl":
 		"=D" (addr), "=c"(cnt): "d"(port), "0"(addr), "1"(cnt): "memory", "cc");
 }
-
-#endif
