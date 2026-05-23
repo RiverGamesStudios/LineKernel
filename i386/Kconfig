@@ -17,3 +17,9 @@ config SERIAL_CONSOLE
     help
       Enable serial console?
     depends on CONSOLE
+
+config PS2_KEYBOARD
+    bool "ps2 keyboard"
+    default y
+    help
+      Enable PS/2 keyboard support?

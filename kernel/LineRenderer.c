@@ -38,6 +38,9 @@ void terminal_initialize(void)
 #ifdef CONFIG_SERIAL_CONSOLE
 	init_serial();
 #endif
+#ifdef CONFIG_UART
+	uart_init();
+#endif
 }
 
 void terminal_putchar(char c)
@@ -47,6 +50,9 @@ void terminal_putchar(char c)
 #endif
 #ifdef CONFIG_SERIAL_CONSOLE
 	write_serial(c);
+#endif
+#ifdef CONFIG_UART
+	uart_putchar(c);
 #endif
 }
 
@@ -58,6 +64,10 @@ void terminal_newline(void)
 #ifdef CONFIG_SERIAL_CONSOLE
 	write_serial('\r');
 	write_serial('\n');
+#endif
+#ifdef CONFIG_UART
+	uart_putchar('\r');
+	uart_putchar('\n');
 #endif
 }
 

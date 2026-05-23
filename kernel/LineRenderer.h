@@ -11,6 +11,9 @@
 #ifdef CONFIG_VGA_CONSOLE
 #include "vga_console.h"
 #endif
+#ifdef CONFIG_UART
+#include "uart.h"
+#endif
 
 void terminal_initialize(void);
 
