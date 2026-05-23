@@ -1,0 +1,17 @@
+config GPT
+    bool "gpt partition table"
+    default y
+    help
+      Enable GPT partition table?
+
+config PS2_KEYBOARD
+    bool "ps2 keyboard"
+    default y
+    help
+      Enable PS/2 keyboard support?
+
+config CONSOLE
+    bool "console support"
+    default y
+    help
+      Enable console support?

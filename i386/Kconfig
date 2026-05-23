@@ -1,0 +1,19 @@
+config IDE
+    bool "pci ide controller"
+    default y
+    help
+      Enable PCI IDE controller?
+
+config VGA_CONSOLE
+    bool "vga console"
+    default y
+    help
+      Enable VGA console?
+    depends on CONSOLE
+
+config SERIAL_CONSOLE
+    bool "serial console"
+    default y
+    help
+      Enable serial console?
+    depends on CONSOLE

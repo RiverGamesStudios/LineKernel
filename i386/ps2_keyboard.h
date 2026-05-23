@@ -1,7 +1,7 @@
 #ifndef __PS2_KEYBOARD_H__
 #define __PS2_KEYBOARD_H__
-#include "config.h"
-#ifdef ps2_keyboard
+#include "kconfig.h"
+#ifdef CONFIG_PS2_KEYBOARD
 
 #include "bios_tools.h"
 #include <stdint.h>

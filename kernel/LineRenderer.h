@@ -1,16 +1,16 @@
 #ifndef __LINERENDERER_H__
 #define __LINERENDERER_H__
 
-#include "config.h"
+#include "kconfig.h"
 #include <stddef.h>
 #include <stdint.h>
 #include "str.h"
-#ifdef serial_console
+#ifdef CONFIG_SERIAL_CONSOLE
 #include "serial.h"
-#endif // serial_console
-#ifdef vga_console
+#endif
+#ifdef CONFIG_VGA_CONSOLE
 #include "vga_console.h"
-#endif // vga_console
+#endif
 
 void terminal_initialize(void);
 

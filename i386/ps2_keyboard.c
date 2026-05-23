@@ -1,8 +1,8 @@
 // phoenixcoe got eaten by a grue
 // or he got mauled by a bear, idk
 // it could also possibly be SAM, he seems suspiciously quiet
-#include "config.h"
-#ifdef ps2_keyboard
+#include "kconfig.h"
+#ifdef CONFIG_PS2_KEYBOARD
 #include "ps2_keyboard.h"
 
 static int is_shift_pressed = 0;
@@ -96,4 +96,4 @@ char keyboard_read_scancode_to_ascii()
 	return c;
 }
 
-#endif // ps2_keyboard
+#endif // CONFIG_PS2_KEYBOARD
