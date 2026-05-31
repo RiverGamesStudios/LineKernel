@@ -2,7 +2,6 @@
 #include "version.h"
 #include "LineRenderer.h"
 #include "version.h"
-#include "ide.h"
 #ifdef CONFIG_PS2_KEYBOARD
 #include "ps2_keyboard.h"
 #endif
@@ -19,12 +18,6 @@ void initialize_start(void)
 #ifdef CONFIG_PS2_KEYBOARD
 	keyboard_init();
 	terminal_writestring("PS/2 keyboard controller initialized.\n");
-#endif
-
-#ifdef CONFIG_IDE
-	terminal_writestring("Initializing PCI IDE Controller...\n");
-	ide_initialize(0x1F0, 0x3F6, 0x170, 0x376, 0x000);
-	terminal_writestring("PCI IDE Controller initialized.\n");
 #endif
 }
 
