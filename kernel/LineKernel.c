@@ -2,11 +2,15 @@
 #include "version.h"
 #include "LineRenderer.h"
 #include "version.h"
+#include "power.h"
 #ifdef CONFIG_PS2_KEYBOARD
 #include "ps2_keyboard.h"
 #endif
 #ifdef CONFIG_SERIAL_CONSOLE
 #include "serial.h"
+#endif
+#ifdef CONFIG_UART
+#include "uart.h"
 #endif
 
 void initialize_start(void)
@@ -32,6 +36,7 @@ void kernel_main(void)
 	int ready;
 
 	for (;;) {
+		// todo: LineInput
 #ifdef CONFIG_PS2_KEYBOARD
 		ready = is_kbd_ready_to_read();
 		if (ready == 0) {
@@ -45,6 +50,15 @@ void kernel_main(void)
 		if (ready != 0) {
 			c = read_serial_right_now();
 			c = serial_sane_control_codes(c);
+			terminal_write_for_char(c);
+		}
+#endif
+
+#ifdef CONFIG_UART
+		ready = get_uart_input();
+		if (ready != 0) {
+			c = ready;
+			if (c == '\r') c = '\n'; /* Workaround for newlines */
 			terminal_write_for_char(c);
 		}
 #endif

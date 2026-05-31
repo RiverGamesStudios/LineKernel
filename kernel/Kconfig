@@ -4,12 +4,6 @@ config GPT
     help
       Enable GPT partition table?
 
-config PS2_KEYBOARD
-    bool "ps2 keyboard"
-    default y
-    help
-      Enable PS/2 keyboard support?
-
 config CONSOLE
     bool "console support"
     default y

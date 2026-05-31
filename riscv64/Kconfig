@@ -1,0 +1,6 @@
+config UART
+    bool "uart console"
+    default y
+    help
+      Enable UART console? This works similar to serial.
+    depends on CONSOLE
