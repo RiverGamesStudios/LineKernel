@@ -1,9 +1,3 @@
-config IDE
-    bool "pci ide controller"
-    default y
-    help
-      Enable PCI IDE controller?
-
 config VGA_CONSOLE
     bool "vga console"
     default y
