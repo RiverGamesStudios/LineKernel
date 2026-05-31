@@ -2,6 +2,7 @@
 
 #ifdef CONFIG_GPT
 #include "gpt.h"
+#include <stdint.h>
 #include "printf.h"
 #define kprintf printf
 
@@ -31,5 +32,4 @@ typedef struct {
 	uint16_t partition_name[36];	// UTF-16LE
 } __attribute__((packed)) gpt_entry_t;
 
-#endif
 #endif
