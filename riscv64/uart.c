@@ -31,6 +31,7 @@ char get_uart_input(void)
 char read_uart(void)
 {
 	char c = 0;
+
 	while (c == 0) {
 		c = get_uart_input();
 	}
