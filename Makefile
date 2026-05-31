@@ -25,13 +25,13 @@ xconfig: Kconfig
 	kconfig-qconf Kconfig
 
 # todo: remove -lgcc
-LineKernel: kernel/kconfig.h $(OBJ)
+LineKernel: $(OBJ)
 	$(CC) -o LineKernel $(LDFLAGS) $(OBJ) -lgcc
 
 LineKernel.gz: LineKernel
 	gzip -9 -n -f -k LineKernel
 
-%.o: %.c
+%.o: %.c kernel/kconfig.h
 	$(CC) -c $< -o $@ $(CFLAGS)
 
 %.o: %.s

@@ -21,10 +21,8 @@ void initialize_start(void)
 	terminal_writestring("Booting LineKernel v" VERSION "...\n\n");
 	terminal_writestring("LineRenderer initialized.\n");
 
-#ifdef CONFIG_PS2_KEYBOARD
 	keyboard_init();
-	terminal_writestring("PS/2 keyboard controller initialized.\n");
-#endif
+	terminal_writestring("Keyboard input initialized.\n");
 }
 
 void kernel_main(void)

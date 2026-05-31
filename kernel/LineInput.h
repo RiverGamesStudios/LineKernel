@@ -16,5 +16,6 @@
 #endif
 
 char get_char(void);
+void keyboard_init(void);
 
 #endif
