@@ -95,6 +95,11 @@ void terminal_backspace(void)
 		write_serial('C');
 	}
 #endif
+#ifdef CONFIG_UART
+	uart_putchar('\b');
+	uart_putchar(' ');
+	uart_putchar('\b');
+#endif
 }
 
 void terminal_write_for_char(const char c)

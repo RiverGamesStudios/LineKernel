@@ -67,6 +67,7 @@ void kernel_main(void)
 		ready = get_uart_input();
 		if (ready != 0) {
 			c = ready;
+			if (c == '\r') c = '\n'; /* Workaround for newlines */
 			terminal_write_for_char(c);
 		}
 #endif
