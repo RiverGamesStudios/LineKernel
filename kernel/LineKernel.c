@@ -3,8 +3,6 @@
 #include "LineRenderer.h"
 #include "version.h"
 #include "power.h"
-#ifdef CONFIG_IDE
-#endif
 #ifdef CONFIG_PS2_KEYBOARD
 #include "ps2_keyboard.h"
 #endif
