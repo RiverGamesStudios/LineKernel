@@ -2,6 +2,7 @@
 #include "version.h"
 #include "LineRenderer.h"
 #include "version.h"
+#include "panic.h"
 #include "power.h"
 #ifdef CONFIG_PS2_KEYBOARD
 #include "ps2_keyboard.h"
@@ -58,7 +59,8 @@ void kernel_main(void)
 		ready = get_uart_input();
 		if (ready != 0) {
 			c = ready;
-			if (c == '\r') c = '\n'; /* Workaround for newlines */
+			if (c == '\r')
+				c = '\n';		/* Workaround for newlines */
 			terminal_write_for_char(c);
 		}
 #endif
