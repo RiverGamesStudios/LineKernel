@@ -35,7 +35,6 @@ void kernel_main(void)
 	we_are_running();
 
 	for (;;) {
-		// todo: LineInput
 		terminal_write_for_char(get_char());
 	}
 }

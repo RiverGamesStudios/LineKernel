@@ -41,10 +41,10 @@ run: all
 	$(QEMU) -m 2G -kernel LineKernel $(DTYPE) $(DISK)
 
 LineKernel.iso:
-	cp -r ../iso .
+	cp -r iso $(ARCH)
 	cp LineKernel.gz iso/boot/LineKernel.gz
 	grub-mkrescue -o LineKernel.iso iso
-	rm -r ./iso
+	rm -r ./$(ARCH)/iso
 
 run-iso: LineKernel.iso
 	$(QEMU) -cdrom LineKernel.iso $(DTYPE) $(DISK)
