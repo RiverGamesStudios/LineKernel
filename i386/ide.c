@@ -143,7 +143,7 @@ void ide_read_buffer(unsigned char channel, unsigned char reg, unsigned int buff
 	   the code the compiler generates between the inline assembly blocks. */
 	if (reg > 0x07 && reg < 0x0C)
 		ide_write(channel, ATA_REG_CONTROL, 0x80 | channels[channel].nIEN);
-	asm("pushw %es; movw %ds, %ax; movw %ax, %es");
+	__asm__("pushw %es; movw %ds, %ax; movw %ax, %es");
 	if (reg < 0x08)
 		insl(channels[channel].base + reg - 0x00, buffer, quads);
 	else if (reg < 0x0C)
@@ -152,7 +152,7 @@ void ide_read_buffer(unsigned char channel, unsigned char reg, unsigned int buff
 		insl(channels[channel].ctrl + reg - 0x0A, buffer, quads);
 	else if (reg < 0x16)
 		insl(channels[channel].bmide + reg - 0x0E, buffer, quads);
-	asm("popw %es;");
+	__asm__("popw %es;");
 	if (reg > 0x07 && reg < 0x0C)
 		ide_write(channel, ATA_REG_CONTROL, channels[channel].nIEN);
 }
@@ -488,20 +488,20 @@ unsigned char ide_ata_access(unsigned char direction, unsigned char drive, unsig
 		for (i = 0; i < numsects; i++) {
 			if ((err = ide_polling(channel, 1)))
 				return err;		// Polling, set error and exit if there is.
-			asm("pushw %es");
-		  asm("mov %%ax, %%es": :"a"(selector));
-		  asm("rep insw": :"c"(words), "d"(bus), "D"(edi));
+			__asm__("pushw %es");
+		  __asm__("mov %%ax, %%es": :"a"(selector));
+		  __asm__("rep insw": :"c"(words), "d"(bus), "D"(edi));
 												// Receive Data.
-			asm("popw %es");
+			__asm__("popw %es");
 			edi += (words * 2);
 	} else {
 		// PIO Write.
 		for (i = 0; i < numsects; i++) {
 			ide_polling(channel, 0);	// Polling.
-			asm("pushw %ds");
-			asm("mov %%ax, %%ds"::"a"(selector));
-			asm("rep outsw"::"c"(words), "d"(bus), "S"(edi));	// Send Data
-			asm("popw %ds");
+			__asm__("pushw %ds");
+			__asm__("mov %%ax, %%ds"::"a"(selector));
+			__asm__("rep outsw"::"c"(words), "d"(bus), "S"(edi));	// Send Data
+			__asm__("popw %ds");
 			edi += (words * 2);
 		}
 		ide_write(channel, ATA_REG_COMMAND, (int[]) { ATA_CMD_CACHE_FLUSH,
@@ -576,7 +576,7 @@ unsigned char ide_atapi_read(unsigned char drive, unsigned int lba, unsigned cha
 
 	// (VIII): Sending the packet data:
 	// ------------------------------------------------------------------
-  asm("rep   outsw": :"c"(6), "d"(bus), "S"(atapi_packet));
+  __asm__("rep   outsw": :"c"(6), "d"(bus), "S"(atapi_packet));
 											// Send Packet Data
 	// (IX): Receiving Data:
 	// ------------------------------------------------------------------
@@ -584,10 +584,10 @@ unsigned char ide_atapi_read(unsigned char drive, unsigned int lba, unsigned cha
 		ide_wait_irq();			// Wait for an IRQ.
 		if ((err = ide_polling(channel, 1)))
 			return err;			// Polling and return if error.
-		asm("pushw %es");
-		asm("mov %%ax, %%es"::"a"(selector));
-		asm("rep insw"::"c"(words), "d"(bus), "D"(edi));	// Receive Data.
-		asm("popw %es");
+		__asm__("pushw %es");
+		__asm__("mov %%ax, %%es"::"a"(selector));
+		__asm__("rep insw"::"c"(words), "d"(bus), "D"(edi));	// Receive Data.
+		__asm__("popw %es");
 		edi += (words * 2);
 	}
 	// (X): Waiting for an IRQ:
@@ -721,7 +721,7 @@ void ide_atapi_eject(unsigned char drive)
 
 		// (VI): Sending the packet data:
 		// ------------------------------------------------------------------
-		asm("rep   outsw"::"c"(6), "d"(bus), "S"(atapi_packet));	// Send Packet Data
+		__asm__("rep   outsw"::"c"(6), "d"(bus), "S"(atapi_packet));	// Send Packet Data
 		ide_wait_irq();			// Wait for an IRQ.
 		err = ide_polling(channel, 1);	// Polling and get error code.
 		if (err == 3)
