@@ -1,3 +1,4 @@
+#include "LineInput.h"
 #include "kernelcheck.h"
 #include "version.h"
 #include "LineRenderer.h"
@@ -33,36 +34,8 @@ void kernel_main(void)
 	terminal_writestring("Core services initialized.\n\n");
 	we_are_running();
 
-	char c;
-	int ready;
-
 	for (;;) {
 		// todo: LineInput
-#ifdef CONFIG_PS2_KEYBOARD
-		ready = is_kbd_ready_to_read();
-		if (ready == 0) {
-			c = keyboard_read_scancode_to_ascii_right_now();
-			terminal_write_for_char(c);
-		}
-#endif
-
-#ifdef CONFIG_SERIAL_CONSOLE
-		ready = serial_received();
-		if (ready != 0) {
-			c = read_serial_right_now();
-			c = serial_sane_control_codes(c);
-			terminal_write_for_char(c);
-		}
-#endif
-
-#ifdef CONFIG_UART
-		ready = get_uart_input();
-		if (ready != 0) {
-			c = ready;
-			if (c == '\r')
-				c = '\n';		/* Workaround for newlines */
-			terminal_write_for_char(c);
-		}
-#endif
+		terminal_write_for_char(get_char());
 	}
 }
