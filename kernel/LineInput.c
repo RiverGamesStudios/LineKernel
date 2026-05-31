@@ -6,31 +6,31 @@ char get_char(void)
 	int ready;
 
 #ifdef CONFIG_PS2_KEYBOARD
-    ready = is_kbd_ready_to_read();
-    if (ready == 0) {
-        c = keyboard_read_scancode_to_ascii_right_now();
-        return c;
-    }
+	ready = is_kbd_ready_to_read();
+	if (ready == 0) {
+		c = keyboard_read_scancode_to_ascii_right_now();
+		return c;
+	}
 #endif
 
 #ifdef CONFIG_SERIAL_CONSOLE
-    ready = serial_received();
-    if (ready != 0) {
-        c = read_serial_right_now();
-        c = serial_sane_control_codes(c);
-        return c;
-    }
+	ready = serial_received();
+	if (ready != 0) {
+		c = read_serial_right_now();
+		c = serial_sane_control_codes(c);
+		return c;
+	}
 #endif
 
 #ifdef CONFIG_UART
-    ready = get_uart_input();
-    if (ready != 0) {
-        c = ready;
-        if (c == '\r')
-            c = '\n';		/* Workaround for newlines */
-        return c;
-    }
+	ready = get_uart_input();
+	if (ready != 0) {
+		c = ready;
+		if (c == '\r')
+			c = '\n';			// Workaround for newlines
+		return c;
+	}
 #endif
 
-    return '\0';
+	return '\0';
 }
