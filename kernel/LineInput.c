@@ -6,9 +6,9 @@ char get_char(void)
 	int ready;
 
 #ifdef CONFIG_PS2_KEYBOARD
-	ready = is_kbd_ready_to_read();
+	ready = ps2_kbd_is_kbd_ready_to_read();
 	if (ready == 0) {
-		c = keyboard_read_scancode_to_ascii_right_now();
+		c = ps2_kbd_keyboard_read_scancode_to_ascii_right_now();
 		return c;
 	}
 #endif
@@ -33,4 +33,11 @@ char get_char(void)
 #endif
 
 	return '\0';
+}
+
+void keyboard_init(void)
+{
+#ifdef CONFIG_PS2_KEYBOARD
+	ps2_kbd_keyboard_init();
+#endif
 }

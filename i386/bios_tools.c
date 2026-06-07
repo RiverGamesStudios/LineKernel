@@ -25,10 +25,3 @@ void insl(int port, uint32_t addr, int cnt)
 	__asm__ volatile ("cld; rep insl":
 		"=D" (addr), "=c"(cnt): "d"(port), "0"(addr), "1"(cnt): "memory", "cc");
 }
-
-void halt(void)
-{
-	while (1) {
-		__asm__ volatile ("hlt");
-	}
-}
