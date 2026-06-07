@@ -23,5 +23,5 @@ void io_wait(void)
 void insl(int port, uint32_t addr, int cnt)
 {
 	__asm__ volatile ("cld; rep insl":
-		"=D" (addr), "=c"(cnt): "d"(port), "0"(addr), "1"(cnt): "memory", "cc");
+		"=D" (addr), "=c"(cnt):"d"(port), "0"(addr), "1"(cnt):"memory", "cc");
 }

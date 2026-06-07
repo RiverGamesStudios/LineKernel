@@ -68,8 +68,7 @@ void vga_terminal_initialize(void)
 {
 	terminal_row = 0;
 	terminal_column = 0;
-	terminal_setcolor(vga_entry_color(VGA_COLOR_LIGHT_GREY,
-			VGA_COLOR_BLACK));
+	terminal_setcolor(vga_entry_color(VGA_COLOR_LIGHT_GREY, VGA_COLOR_BLACK));
 
 	for (size_t y = 0; y < 25; y++) {
 		for (size_t x = 0; x < 80; x++) {
