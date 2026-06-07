@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include "compilers.h"
 #include "panic.h"
 
 #if UINT32_MAX == UINTPTR_MAX
@@ -10,7 +11,7 @@
 
 uintptr_t __stack_chk_guard = STACK_CHK_GUARD;
 
-__attribute__((noreturn))
+ATTRIBUTE_NORETURN
 void __stack_chk_fail(void)
 {
 	panic("Stack smashing detected");

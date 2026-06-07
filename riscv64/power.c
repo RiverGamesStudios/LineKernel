@@ -1,4 +1,5 @@
 #include "power.h"
+#define SYSCON_ADDR 0x100000
 
 void poweroff(void)
 {

@@ -7,5 +7,5 @@
 # Requirements
 These functions/variables MUST be defined.
 
-- `void reboot(void);` and `void poweroff(void);` function, even if it does nothing. This should be in `power.h`/`power.c`.
-- `void halt(void);` function. This should halt the CPU, stalling it forever. This should be in `power.h`/`power.c`.
+- `void reboot(void);` and `void poweroff(void);` function, even if it does nothing. This should be in `power.c`.
+- `void halt(void);` function. This should halt the CPU, stalling it forever. This should be in `power.c`.
