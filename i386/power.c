@@ -8,3 +8,10 @@ void reboot(void)
 void poweroff(void)
 {
 }
+
+void halt(void)
+{
+	while (1) {
+		__asm__ volatile ("hlt");
+	}
+}
