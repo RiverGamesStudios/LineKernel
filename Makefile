@@ -8,7 +8,7 @@ endif
 
 include kernel/Makefile
 CFLAGS ?= -O2
-CFLAGS += -Ikernel -Ithird-party -I$(ARCH) -I$(META_ARCH) -DARCH_$(ARCH) -DARCH=\"$(ARCH)\" -DVERSION=\"$(VERSION)\" -std=gnu99 -ffreestanding -Wall -Wextra -Wpedantic -fstack-protector-all $(ARCH_CFLAGS)
+CFLAGS += -Ikernel -Ithird-party -I$(ARCH) -I$(META_ARCH) -DARCH_$(ARCH) -DARCH=\"$(ARCH)\" -DVERSION=\"$(VERSION)\" -std=gnu99 -ffreestanding -Wall -Wextra -Wpedantic -Wmissing-declarations -fstack-protector-all $(ARCH_CFLAGS)
 OBJ = $(ARCH_OBJ) $(META_ARCH_OBJ) $(KERNEL_OBJ)
 
 all: LineKernel LineKernel.gz

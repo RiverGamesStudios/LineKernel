@@ -1,20 +1,5 @@
+#include "random.h"
 #include "panic.h"
-
-/* https://www.open-std.org/jtc1/sc22/wg14/www/docs/n1570.pdf */
-static unsigned long int next = 'L' + 'I' + 'N' + 'E' + 'C' + 'O' + 'R' + 'E';
-
-int rand(void)					// RAND_MAX assumed to be 32767
-{
-	next = next * 1103515245 + 12345;
-	return (unsigned int)(next / 65536) % 32768;
-}
-
-void srand(unsigned int seed)
-{
-	next = seed;
-}
-
-/* https://www.open-std.org/jtc1/sc22/wg14/www/docs/n1570.pdf */
 
 #define STANDARD_ERROR_ART 3
 #ifdef ARCH_riscv64
@@ -82,14 +67,14 @@ char* error_art[ERROR_ART] = {
 #endif
 };
 
-char* random_error_message()
+char* random_error_message(void)
 {
 	int fake_rand = rand();
 
 	if (fake_rand) {
 		return error_art[fake_rand % ERROR_ART];
 	} else {
-		return "None";
+		return "\n";
 	}
 }
 

@@ -25,7 +25,9 @@ uint8_t ps2_kbd_keyboard_read_scancode_right_now();
 char ps2_kbd_keyboard_to_ascii(uint8_t scancode);
 char ps2_kbd_keyboard_read_scancode_to_ascii();
 char ps2_kbd_keyboard_read_scancode_to_ascii_right_now();
+void ps2_kbd_wait_kbd_write();
 int ps2_kbd_is_kbd_ready_to_read();
+void ps2_kbd_wait_kbd_read();
 
 #endif
 #endif
