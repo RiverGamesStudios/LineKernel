@@ -1,4 +1,3 @@
-#include "random.h"
 #include "panic.h"
 
 #define STANDARD_ERROR_ART 3

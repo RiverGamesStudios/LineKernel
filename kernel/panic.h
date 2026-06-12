@@ -1,9 +1,10 @@
 #ifndef __PANIC_H__
 #define __PANIC_H__
 
-#include "bios_tools.h"
-#include "printf.h"
 #include "LineRenderer.h"
+#include "power.h"
+#include "printf.h"
+#include "random.h"
 
 char* random_error_message(void);
 void panic(const char* format, ...);
