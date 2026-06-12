@@ -2,11 +2,14 @@ VERSION = 0.1.0.983
 
 ARCH ?= i386
 include $(ARCH)/Makefile
+ifneq (x$(META_ARCH),x)
+	include $(META_ARCH)/Makefile
+endif
 
 include kernel/Makefile
 CFLAGS ?= -O2
-CFLAGS += -Ikernel -Ithird-party -I$(ARCH) -DARCH_$(ARCH) -DARCH=\"$(ARCH)\" -DVERSION=\"$(VERSION)\" -std=gnu99 -ffreestanding -Wall -Wextra -Wpedantic -Wmissing-declarations -fstack-protector-all $(ARCH_CFLAGS)
-OBJ = $(ARCH_OBJ) $(KERNEL_OBJ)
+CFLAGS += -Ikernel -Ithird-party -I$(ARCH) -I$(META_ARCH) -DARCH_$(ARCH) -DARCH=\"$(ARCH)\" -DVERSION=\"$(VERSION)\" -std=gnu99 -ffreestanding -Wall -Wextra -Wpedantic -Wmissing-declarations -fstack-protector-all $(ARCH_CFLAGS)
+OBJ = $(ARCH_OBJ) $(META_ARCH_OBJ) $(KERNEL_OBJ)
 
 all: LineKernel LineKernel.gz
 
@@ -38,19 +41,21 @@ LineKernel.gz: LineKernel
 	$(AS) $< -o $@
 
 run: all
-	$(QEMU) -m 2G -kernel LineKernel $(DTYPE) $(DISK)
+	$(QEMU) -m 2G -kernel LineKernel $(QEMUARGS)
 
-LineKernel.iso:
-	cp -r ../iso .
+LineKernel.iso: LineKernel.gz
+	cp -r iso $(ARCH)
 	cp LineKernel.gz iso/boot/LineKernel.gz
 	grub-mkrescue -o LineKernel.iso iso
-	rm -r ./iso
+	rm -r ./$(ARCH)/iso
 
 run-iso: LineKernel.iso
-	$(QEMU) -cdrom LineKernel.iso $(DTYPE) $(DISK)
+	$(QEMU) -cdrom LineKernel.iso $(QEMUARGS)
 
 clean:
-	rm -f LineKernel LineKernel.gz $(OBJ) kernel/kconfig.h
+	rm -f LineKernel LineKernel.gz LineKernel.iso $(OBJ) kernel/kconfig.h
 
 distclean: clean
 	rm -rf Kconfig .config .config.old kernel/LineKernel.qcow2 docs/
+
+.PHONY: all Kconfig run run-iso clean distclean
