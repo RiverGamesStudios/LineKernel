@@ -11,7 +11,7 @@
 #include "bios_tools.h"
 
 void vga_terminal_enable_cursor(uint8_t cursor_start, uint8_t cursor_end);
-void vga_terminal_disable_cursor();
+void vga_terminal_disable_cursor(void);
 void vga_terminal_update_cursor(int x, int y);
 void vga_terminal_setcolor(uint8_t color);
 void vga_terminal_initialize(void);

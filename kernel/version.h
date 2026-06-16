@@ -8,6 +8,6 @@
 
 /* Versioning system: X.X.X.XXXX */
 
-void we_are_running();
+void we_are_running(void);
 
 #endif

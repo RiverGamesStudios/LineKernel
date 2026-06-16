@@ -13,7 +13,7 @@
 
 #include <stdint.h>
 #include <stddef.h>
-void uart_init();
+void uart_init(void);
 void uart_putchar(char c);
 char get_uart_input(void);
 char read_uart(void);

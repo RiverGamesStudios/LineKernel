@@ -44,7 +44,7 @@ void terminal_writeint(int data);
 
 void terminal_enable_cursor(uint8_t cursor_start, uint8_t cursor_end);
 
-void terminal_disable_cursor();
+void terminal_disable_cursor(void);
 
 void terminal_update_cursor(int x, int y);
 

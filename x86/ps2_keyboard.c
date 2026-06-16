@@ -10,17 +10,17 @@
 
 static int is_shift_pressed = 0;
 
-void ps2_kbd_wait_kbd_write()
+void ps2_kbd_wait_kbd_write(void)
 {
 	while (inb(PS2_KBD_STATUS_PORT) & PS2_KBD_STATUS_INPUT_FULL);
 }
 
-int ps2_kbd_is_kbd_ready_to_read()
+int ps2_kbd_is_kbd_ready_to_read(void)
 {
 	return (!(inb(PS2_KBD_STATUS_PORT) & PS2_KBD_STATUS_OUTPUT_FULL));
 }
 
-void ps2_kbd_wait_kbd_read()
+void ps2_kbd_wait_kbd_read(void)
 {
 	while (!(inb(PS2_KBD_STATUS_PORT) & PS2_KBD_STATUS_OUTPUT_FULL));
 }
@@ -29,19 +29,19 @@ void ps2_kbd_wait_kbd_read()
 // best regards, 
 // SAM
 
-void ps2_kbd_keyboard_init()
+void ps2_kbd_keyboard_init(void)
 {
 	ps2_kbd_wait_kbd_write();
 	outb(PS2_KBD_DATA_PORT, PS2_KBD_CMD_SCAN_ON);
 }
 
-uint8_t ps2_kbd_keyboard_read_scancode()
+uint8_t ps2_kbd_keyboard_read_scancode(void)
 {
 	ps2_kbd_wait_kbd_read();
 	return inb(PS2_KBD_DATA_PORT);
 }
 
-uint8_t ps2_kbd_keyboard_read_scancode_right_now()
+uint8_t ps2_kbd_keyboard_read_scancode_right_now(void)
 {
 	return inb(PS2_KBD_DATA_PORT);
 }
@@ -83,7 +83,7 @@ char ps2_kbd_keyboard_to_ascii(uint8_t scancode)
 	return 0;
 }
 
-char ps2_kbd_keyboard_read_scancode_to_ascii_right_now()
+char ps2_kbd_keyboard_read_scancode_to_ascii_right_now(void)
 {
 	uint8_t scancode = ps2_kbd_keyboard_read_scancode_right_now();
 	char c = ps2_kbd_keyboard_to_ascii(scancode);
@@ -91,7 +91,7 @@ char ps2_kbd_keyboard_read_scancode_to_ascii_right_now()
 	return c;
 }
 
-char ps2_kbd_keyboard_read_scancode_to_ascii()
+char ps2_kbd_keyboard_read_scancode_to_ascii(void)
 {
 	uint8_t scancode = ps2_kbd_keyboard_read_scancode();
 	char c = ps2_kbd_keyboard_to_ascii(scancode);

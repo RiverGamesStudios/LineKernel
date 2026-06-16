@@ -3,7 +3,7 @@
 
 #include "serial.h"
 
-int init_serial()
+int init_serial(void)
 {
 	outb(PORT + 1, 0x00);
 	outb(PORT + 3, 0x80);
@@ -23,7 +23,7 @@ int init_serial()
 	return 0;
 }
 
-int serial_received()
+int serial_received(void)
 {
 	return inb(PORT + 5) & 1;
 }
@@ -36,19 +36,19 @@ char serial_sane_control_codes(const char c)
 		return c;
 }
 
-char read_serial_right_now()
+char read_serial_right_now(void)
 {
 	return inb(PORT);
 }
 
-char read_serial()
+char read_serial(void)
 {
 	while (serial_received() == 0);
 
 	return read_serial_right_now();
 }
 
-int is_transmit_empty()
+int is_transmit_empty(void)
 {
 	return inb(PORT + 5) & 0x20;
 }

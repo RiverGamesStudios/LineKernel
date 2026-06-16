@@ -9,17 +9,17 @@
 
 #define PORT 0x3f8
 
-int init_serial();
+int init_serial(void);
 
-int serial_received();
+int serial_received(void);
 
-char read_serial_right_now();
+char read_serial_right_now(void);
 
-char read_serial();
+char read_serial(void);
 
 char serial_sane_control_codes(const char c);
 
-int is_transmit_empty();
+int is_transmit_empty(void);
 
 void write_serial(char a);
 

@@ -5,7 +5,7 @@
 #ifdef CONFIG_UART
 #include "uart.h"
 
-void uart_init()
+void uart_init(void)
 {
 	volatile uint8_t* ptr = (uint8_t *) UART_ADDR;
 
