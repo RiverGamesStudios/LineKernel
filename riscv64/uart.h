@@ -7,7 +7,9 @@
 #include "kconfig.h"
 #ifdef CONFIG_UART
 
+#ifdef CONFIG_VIRT_MACHINE
 #define UART_ADDR 0x10000000
+#endif
 
 #include <stdint.h>
 #include <stddef.h>
