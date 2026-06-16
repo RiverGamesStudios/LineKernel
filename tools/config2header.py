@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+
+# SPDX-License-Identifier: GPL-3.0-or-later
+# SPDX-FileCopyrightText: Copyright (C) 2026 River Games
+
 with open(".config", encoding="utf-8") as f:
     config = f.read()
 

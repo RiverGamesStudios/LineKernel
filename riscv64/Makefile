@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
+# SPDX-FileCopyrightText: Copyright (C) 2026 River Games
 CC = riscv64-unknown-elf-gcc
 AS = riscv64-unknown-elf-as
 LDFLAGS = -T riscv64/linker.ld -ffreestanding -O2 -nostdlib

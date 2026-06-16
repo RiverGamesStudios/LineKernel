@@ -1,3 +1,6 @@
+/* SPDX-License-Identifier: GPL-3.0-or-later
+ * SPDX-FileCopyrightText: Copyright (C) 2026 River Games */
+
 #include "random.h"
 
 /* https://www.open-std.org/jtc1/sc22/wg14/www/docs/n1570.pdf */

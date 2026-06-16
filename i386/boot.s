@@ -1,3 +1,6 @@
+/* SPDX-License-Identifier: GPL-3.0-or-later
+ * SPDX-FileCopyrightText: Copyright (C) 2026 River Games */
+
 /* Declare constants for the multiboot header. */
 .set ALIGN,    1<<0             /* align loaded modules on page boundaries */
 .set MEMINFO,  1<<1             /* provide memory map */

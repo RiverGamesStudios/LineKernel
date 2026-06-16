@@ -1,3 +1,6 @@
+/* SPDX-License-Identifier: GPL-3.0-or-later
+ * SPDX-FileCopyrightText: Copyright (C) 2026 River Games */
+
 // phoenixcoe got eaten by a grue
 // or he got mauled by a bear, idk
 // it could also possibly be SAM, he seems suspiciously quiet

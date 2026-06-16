@@ -1,3 +1,6 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
+# SPDX-FileCopyrightText: Copyright (C) 2026 River Games
+
 # If you want to run the kernel from `make run`, uncomment the following line. Note that you probably shouldn't do this as it can mess with GDB.
 # OUTPUT_FORMAT(elf32-i386)
 ENTRY(_start)

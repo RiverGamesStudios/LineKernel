@@ -30,3 +30,8 @@ This kernel is for the LineCoreOS [x86(_64)](https://wiki.rivergames.ca/wiki/His
     + `make run ARCH=riscv64` - Run an riscv64 kernel image in QEMU
 
 <sup>(c) 2026 River Games Studios ~ LineKernel (Project Estuary)</sup>
+
+<!--
+SPDX-License-Identifier: CC0-1.0
+SPDX-FileCopyrightText: Copyright (C) 2026 River Games
+-->

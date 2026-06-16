@@ -1,9 +1,11 @@
+/* SPDX-License-Identifier: GPL-3.0-or-later
+ * SPDX-FileCopyrightText: Copyright (C) 2026 River Games */
+
 #include "LineInput.h"
 #include "kernelcheck.h"
 #include "version.h"
 #include "LineRenderer.h"
 #include "version.h"
-#include "power.h"
 #ifdef CONFIG_PS2_KEYBOARD
 #include "ps2_keyboard.h"
 #endif
