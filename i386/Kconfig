@@ -1,22 +1,25 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 # SPDX-FileCopyrightText: Copyright (C) 2026 River Games
 
+menu "Console"
+    depends on CONSOLE
+
 config VGA_CONSOLE
     bool "vga console"
     default y
     help
       Enable VGA console?
-    depends on CONSOLE
 
 config SERIAL_CONSOLE
     bool "serial console"
     default y
     help
       Enable serial console?
-    depends on CONSOLE
 
 config PS2_KEYBOARD
     bool "ps2 keyboard"
     default y
     help
       Enable PS/2 keyboard support?
+
+endmenu

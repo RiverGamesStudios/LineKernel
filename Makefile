@@ -3,6 +3,8 @@
 
 VERSION = 0.1.0.983
 
+include kernel/kconfig.mk
+
 ARCH ?= i386
 include $(ARCH)/Makefile
 ifneq (x$(META_ARCH),x)
@@ -18,6 +20,9 @@ all: LineKernel LineKernel.gz
 
 kernel/kconfig.h: .config
 	python3 ./tools/config2header.py .config > kernel/kconfig.h
+
+kernel/kconfig.mk: .config
+	python3 ./tools/config2makefile.py .config > kernel/kconfig.mk
 
 Kconfig: Kconfig.template
 	cp Kconfig.template Kconfig
@@ -37,7 +42,7 @@ LineKernel: $(OBJ)
 LineKernel.gz: LineKernel
 	gzip -9 -n -f -k LineKernel
 
-%.o: %.c kernel/kconfig.h
+%.o: %.c kernel/kconfig.h kernel/kconfig.mk
 	$(CC) -c $< -o $@ $(CFLAGS)
 
 %.o: %.s
@@ -56,7 +61,7 @@ run-iso: LineKernel.iso
 	$(QEMU) -cdrom LineKernel.iso $(QEMUARGS)
 
 clean:
-	rm -f LineKernel LineKernel.gz LineKernel.iso $(OBJ) kernel/kconfig.h
+	rm -f LineKernel LineKernel.gz LineKernel.iso $(OBJ) kernel/kconfig.h kernel/kconfig.mk
 
 distclean: clean
 	rm -rf Kconfig .config .config.old kernel/LineKernel.qcow2 docs/

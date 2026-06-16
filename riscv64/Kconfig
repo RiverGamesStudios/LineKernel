@@ -1,9 +1,24 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 # SPDX-FileCopyrightText: Copyright (C) 2026 River Games
 
+menu "Console"
+    depends on CONSOLE
+
 config UART
     bool "uart console"
     default y
     help
       Enable UART console? This works similar to serial.
-    depends on CONSOLE
+
+endmenu
+
+choice
+    prompt "Machine"
+    default VIRT_MACHINE
+    help
+      Choose your machine.
+
+config VIRT_MACHINE
+    bool "virtual machine"
+
+endchoice

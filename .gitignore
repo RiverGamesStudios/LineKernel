@@ -13,3 +13,4 @@ docs/man
 .config.old
 /Kconfig
 kconfig.h
+kconfig.mk
