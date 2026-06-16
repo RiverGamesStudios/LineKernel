@@ -10,10 +10,12 @@ void reboot(void)
 
 void poweroff(void)
 {
+	/* TODO */
 }
 
 void halt(void)
 {
+	__asm__ volatile ("cli");
 	while (1) {
 		__asm__ volatile ("hlt");
 	}
