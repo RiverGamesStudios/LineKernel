@@ -1,7 +1,7 @@
 /* SPDX-License-Identifier: GPL-3.0-or-later
  * SPDX-FileCopyrightText: Copyright (C) 2026 River Games */
 
- #ifndef __VGA_CONSOLE_H__
+#ifndef __VGA_CONSOLE_H__
 #define __VGA_CONSOLE_H__
 #include "kconfig.h"
 #ifdef CONFIG_VGA_CONSOLE

@@ -16,6 +16,7 @@ void poweroff(void)
 void halt(void)
 {
 	__asm__ volatile ("cli");
+
 	while (1) {
 		__asm__ volatile ("hlt");
 	}
