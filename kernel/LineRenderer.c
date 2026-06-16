@@ -7,10 +7,17 @@ size_t terminal_row;
 size_t terminal_column;
 uint8_t terminal_color;
 
-void terminal_enable_cursor(uint8_t cursor_start, uint8_t cursor_end)
+void terminal_enable_cursor(void)
 {
 #ifdef CONFIG_VGA_CONSOLE
-	vga_terminal_enable_cursor(cursor_start, cursor_end);
+	vga_terminal_enable_cursor(
+#if defined(CONFIG_CURSOR_SMALL)
+		14,
+#elif defined(CONFIG_CURSOR_FULL)
+		0,
+#endif
+		15
+	);
 #endif
 }
 
@@ -44,6 +51,7 @@ void terminal_initialize(void)
 #ifdef CONFIG_UART
 	uart_init();
 #endif
+	terminal_enable_cursor();
 }
 
 void terminal_putchar(char c)

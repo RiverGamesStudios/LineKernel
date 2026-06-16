@@ -10,6 +10,21 @@ config VGA_CONSOLE
     help
       Enable VGA console?
 
+choice
+    prompt "Cursor type"
+    default CURSOR_SMALL
+    help
+      Choose how your cursor should look like.
+    depends on VGA_CONSOLE
+
+config CURSOR_SMALL
+    bool "cursor at the bottom"
+
+config CURSOR_FULL
+    bool "cursor takes up full"
+
+endchoice
+
 config SERIAL_CONSOLE
     bool "serial console"
     default y
