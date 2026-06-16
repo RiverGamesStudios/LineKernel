@@ -3,10 +3,13 @@
 
 #include "LineRenderer.h"
 #include "power.h"
+#include "str.h"
 #include "printf.h"
 #include "random.h"
 
 char* random_error_message(void);
-void panic(const char* format, ...);
+void panic_(const char* file, int line, const char* format, ...);
+
+#define panic(format, ...) panic_(__FILE__, __LINE__, format __VA_OPT__(,) __VA_ARGS__)
 
 #endif

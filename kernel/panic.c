@@ -77,10 +77,19 @@ char* random_error_message(void)
 	}
 }
 
-void panic(const char* format, ...)
+void panic_(const char* file, int line, const char* format, ...)
 {
+	char linestr[30];
 	terminal_writestring(random_error_message());
 	terminal_writestring("KERNEL PANIC!\n");
+	/* Where? */
+	terminal_writestring("Where? ");
+	terminal_writestring(file);
+	terminal_writestring(":");
+	itoa(line, linestr);
+	terminal_writestring(linestr);
+	terminal_writestring("\n");
+	/* Reason: */
 	terminal_writestring("Reason:\n");
 	va_list arg;
 	va_start(arg, format);
