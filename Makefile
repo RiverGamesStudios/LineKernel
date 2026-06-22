@@ -18,6 +18,9 @@ CFLAGS ?= -O2
 CFLAGS += -Ikernel -Ithird-party -I$(ARCH) -I$(META_ARCH) -DARCH_$(ARCH) -DARCH=\"$(ARCH)\" -DVERSION=\"$(VERSION)\" -std=gnu99 -ffreestanding -Wall -Wextra -Wpedantic -Wmissing-declarations -fstack-protector-all $(ARCH_CFLAGS)
 OBJ = $(ARCH_OBJ) $(META_ARCH_OBJ) $(KERNEL_OBJ)
 
+MENUCONFIG ?= kconfig-mconf
+XCONFIG ?= kconfig-qconf
+
 all:
 	make kernel/kconfig.mk kernel/kconfig.h
 	make LineKernel LineKernel.gz
@@ -34,10 +37,10 @@ Kconfig: Kconfig.template
 	sed -i "s/{VERSION}/$(VERSION)/g" Kconfig
 
 menuconfig: Kconfig
-	kconfig-mconf Kconfig
+	$(MENUCONFIG) Kconfig
 
 xconfig: Kconfig
-	kconfig-qconf Kconfig
+	$(XCONFIG) Kconfig
 
 # todo: remove -lgcc
 LineKernel: $(OBJ)
