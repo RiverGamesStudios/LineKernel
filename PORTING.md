@@ -10,6 +10,10 @@ These functions/variables MUST be defined.
 - `void reboot(void);` and `void poweroff(void);` function, even if it does nothing. This should be in `power.c`.
 - `void halt(void);` function. This should halt the CPU, stalling it forever. This should be in `power.c`.
 
+# Meta-arches
+There are meta-arches which architectures are derivatives from.
+`x86` is the only meta-arch as of now.
+
 <!--
 SPDX-License-Identifier: CC0-1.0
 SPDX-FileCopyrightText: Copyright (C) 2026 River Games
