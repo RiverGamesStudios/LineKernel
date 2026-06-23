@@ -113,12 +113,22 @@ void terminal_backspace(void)
 #endif
 }
 
+void terminal_tab(void)
+{
+	terminal_putchar(' ');
+	terminal_putchar(' ');
+	terminal_putchar(' ');
+	terminal_putchar(' ');
+}
+
 void terminal_write_for_char(const char c)
 {
 	if (c == '\b')
 		terminal_backspace();
 	else if (c == '\n')
 		terminal_newline();
+	else if (c == '\t')
+		terminal_tab();
 	else if (c != 0)
 		terminal_putchar(c);
 	terminal_update_cursor(terminal_column, terminal_row);
