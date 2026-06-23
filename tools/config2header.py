@@ -15,4 +15,4 @@ for line in config.split("\n"):
             print(f"#define {name} {option}")
         else:
             if line[1:]:
-                print(f"/*{line[1:]}*/")
+                print(f"/*{line[1:]} */")
