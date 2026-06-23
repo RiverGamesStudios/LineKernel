@@ -16,14 +16,53 @@
 #include "uart.h"
 #endif
 
+#ifdef META_ARCH_x86
+#include "gdt.h"
+#include "idt.h"
+#include "timer.h"
+#endif
+#ifdef CONFIG_FLOPPY
+#include "floppy.h"
+#endif
+
+int has_working_floppy = 0;
+
+void initialize_start(void);
+void kernel_main(void);
+
 void initialize_start(void)
 {
 	terminal_initialize();
 	terminal_writestring("Booting LineKernel v" VERSION "...\n\n");
 	terminal_writestring("LineRenderer initialized.\n");
 
+#ifdef META_ARCH_x86
+	/* Initialize basic GDT, IDT, and Timer (PIT) */
+	gdt_init();
+	terminal_writestring("GDT initialized.\n");
+	idt_init();
+	terminal_writestring("IDT initialized.\n");
+	timer_init(1000);
+	terminal_writestring("System Timer (PIT) initialized at 1000Hz.\n");
+
+	/* Enable hardware interrupts */
+	__asm__ volatile("sti");
+	terminal_writestring("Interrupts enabled.\n");
+#endif
+
 	keyboard_init();
 	terminal_writestring("Keyboard input initialized.\n");
+
+#ifdef CONFIG_FLOPPY
+	terminal_writestring("Initializing floppy drive...\n");
+	if (floppy_init() == 0) {
+		terminal_writestring("Floppy drive fdrive1 initialized successfully.\n");
+		terminal_writestring("Detecting floppy media...\n");
+		has_working_floppy = floppy_detect_fat12(0);
+	} else {
+		terminal_writestring("Failed to initialize floppy drive fdrive1.\n");
+	}
+#endif
 }
 
 void kernel_main(void)

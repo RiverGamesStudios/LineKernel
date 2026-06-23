@@ -1,0 +1,14 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
+# SPDX-FileCopyrightText: Copyright (C) 2026 River Games
+
+# todo: move console here
+
+menu "Storage"
+
+config FLOPPY
+    bool "floppy drive support"
+    default y
+    help
+      Enable support for x86 Floppy Disk Controllers (FDC).
+
+endmenu
