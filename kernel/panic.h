@@ -8,7 +8,7 @@
 #include "power.h"
 #include "str.h"
 #include "printf.h"
-#include "random.h"
+#include "LineRandom.h"
 
 char* random_error_message(void);
 void panic_(const char* file, int line, const char* format, ...);

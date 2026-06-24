@@ -12,3 +12,13 @@ config FLOPPY
       Enable support for x86 Floppy Disk Controllers (FDC).
 
 endmenu
+
+config RDSEED
+    bool "rdseed random number generator"
+    help
+      Enable RNG using RDSEED?
+
+config RDRAND
+    bool "rdrand random number generator"
+    help
+      Enable RNG using RDRAND?

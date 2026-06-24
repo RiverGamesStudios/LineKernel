@@ -11,7 +11,6 @@
 #define STACK_CHK_GUARD 0xba2637b8b1a55f4e
 #endif
 
-
 uintptr_t __stack_chk_guard = STACK_CHK_GUARD;
 
 ATTRIBUTE_NORETURN
