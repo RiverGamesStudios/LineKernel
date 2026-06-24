@@ -1,0 +1,12 @@
+Some things to work on towards finishing LineKernel.
+
+- ✅ Some sort of drives (temporary)
+	Floppies
+
+- 🚧 Some sort of filesystem (temporary)
+
+- 🚧 Executables
+
+- 🚧 SATA/NVME/USB (main drives in LineKernel)
+
+- 🚧 ExFAT (main filesystem in LineKernel)
