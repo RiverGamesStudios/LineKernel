@@ -9,9 +9,9 @@
 
 #ifdef CONFIG_FLOPPY
 int floppy_init(void);
-int floppy_read_sector(int drive, uint32_t lba, uint8_t * out_buf);
-int floppy_write_sector(int drive, uint32_t lba, const uint8_t * in_buf);
-int floppy_detect_fat12(int drive);
+int floppy_read_sector(uint32_t lba, uint8_t * out_buf);
+int floppy_write_sector(uint32_t lba, const uint8_t * in_buf);
+int floppy_detect_fat12();
 #endif
 
 #endif

@@ -11,10 +11,10 @@
 
 #ifdef CONFIG_FLOPPY
 /* FDC registers */
-#define FDC_DOR			0x3F2
-#define FDC_MSR			0x3F4
-#define FDC_FIFO		0x3F5
-#define FDC_CCR			0x3F7
+#define FDC_DOR 		0x3F2
+#define FDC_MSR 		0x3F4
+#define FDC_FIFO 		0x3F5
+#define FDC_CCR 		0x3F7
 
 #define READ_WRITE_TIMEOUT 100000
 
@@ -224,7 +224,7 @@ static int fdc_transfer(int drive, uint8_t cylinder, uint8_t head, uint8_t secto
 	return 0;
 }
 
-int floppy_read_sector(int drive, uint32_t lba, uint8_t* out_buf)
+int floppy_read_sector(uint32_t lba, uint8_t* out_buf)
 {
 	uint8_t cyl, head, sec;
 
@@ -233,7 +233,7 @@ int floppy_read_sector(int drive, uint32_t lba, uint8_t* out_buf)
 	cyl = lba / 36;
 
 	for (int i = 0; i < 3; i++) {
-		int res = fdc_transfer(drive, cyl, head, sec, 0);
+		int res = fdc_transfer(0, cyl, head, sec, 0);
 
 		if (res == 0) {
 			for (int j = 0; j < 512; j++) {
@@ -246,7 +246,7 @@ int floppy_read_sector(int drive, uint32_t lba, uint8_t* out_buf)
 	return -1;
 }
 
-int floppy_write_sector(int drive, uint32_t lba, const uint8_t* in_buf)
+int floppy_write_sector(uint32_t lba, const uint8_t* in_buf)
 {
 	uint8_t cyl, head, sec;
 
@@ -259,7 +259,7 @@ int floppy_write_sector(int drive, uint32_t lba, const uint8_t* in_buf)
 	}
 
 	for (int i = 0; i < 3; i++) {
-		int res = fdc_transfer(drive, cyl, head, sec, 1);
+		int res = fdc_transfer(0, cyl, head, sec, 1);
 
 		if (res == 0) {
 			return 0;
@@ -276,11 +276,11 @@ int floppy_init(void)
 	fdc_reset();
 
 	if (fdc_recalibrate(0) < 0) {
-		printf("Floppy: calibration failed for drive 0\n");
+		printf("Floppy: calibration failed for drive fdrive1\n");
 		return -1;
 	}
 
-	printf("Floppy: drive 0 initialized.\n");
+	printf("Floppy: drive fdrive1 initialized.\n");
 	return 0;
 }
 
@@ -307,12 +307,12 @@ struct fat12_bpb {
 	char fs_type[8];
 } __attribute__((packed));
 
-int floppy_detect_fat12(int drive)
+int floppy_detect_fat12()
 {
 	uint8_t sector[512];
 
 	/* Attempt to read sector 0 */
-	if (floppy_read_sector(drive, 0, sector) < 0) {
+	if (floppy_read_sector(0, sector) < 0) {
 		printf("Floppy: No disk detected or failed to read sector 0.\n");
 		return -1;				/* No disk or read error */
 	}
