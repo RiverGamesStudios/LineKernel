@@ -10,3 +10,5 @@ Some things to work on towards finishing LineKernel.
 - 🚧 SATA/NVME/USB (main drives in LineKernel)
 
 - 🚧 ExFAT (main filesystem in LineKernel)
+
+- 🚧 Universal video console
