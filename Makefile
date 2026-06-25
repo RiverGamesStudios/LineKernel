@@ -19,6 +19,7 @@ CFLAGS += -Ikernel -Ithird-party -I$(ARCH) -I$(META_ARCH) -DMETA_ARCH_$(META_ARC
 OBJ = $(ARCH_OBJ) $(META_ARCH_OBJ) $(KERNEL_OBJ)
 
 MENUCONFIG ?= kconfig-mconf
+CONSOLECONFIG ?= kconfig-conf
 XCONFIG ?= kconfig-qconf
 
 all:
@@ -38,6 +39,12 @@ Kconfig: Kconfig.template
 
 menuconfig: Kconfig
 	$(MENUCONFIG) Kconfig
+
+allyesconfig: Kconfig
+	$(CONSOLECONFIG) Kconfig --allyesconfig
+
+allnoconfig: Kconfig
+	$(CONSOLECONFIG) Kconfig --allnoconfig
 
 xconfig: Kconfig
 	$(XCONFIG) Kconfig

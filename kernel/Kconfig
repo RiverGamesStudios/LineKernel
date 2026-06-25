@@ -1,11 +1,22 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 # SPDX-FileCopyrightText: Copyright (C) 2026 River Games
 
-config GPT
-    bool "gpt partition table"
+config DRIVE
+    bool "storage drives"
     default y
     help
-      Enable GPT partition table?
+      Enable storage drives?
+
+menu "Filesystems"
+    depends on DRIVE
+
+config FAT12
+    bool "fat12 filesystem"
+    default y
+    help
+      Enable FAT12 filesystem?
+
+endmenu
 
 config CONSOLE
     bool "console support"

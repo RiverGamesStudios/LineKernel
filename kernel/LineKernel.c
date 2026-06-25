@@ -1,11 +1,14 @@
 /* SPDX-License-Identifier: GPL-3.0-or-later
  * SPDX-FileCopyrightText: Copyright (C) 2026 River Games */
 
-#include "LineInput.h"
 #include "kernelcheck.h"
 #include "version.h"
 #include "LineRenderer.h"
+#include "LineInput.h"
+#include "LineDrive.h"
+#include "LineFilesystem.h"
 #include "version.h"
+#include "printf.h"
 #ifdef CONFIG_PS2_KEYBOARD
 #include "ps2_keyboard.h"
 #endif
@@ -25,7 +28,10 @@
 #include "floppy.h"
 #endif
 
-int has_working_floppy = 0;
+/* TODO: Set this by kernel command line */
+drivesformat_t drive = fdrive1;
+filesystemformat_t fs = fat12;
+int has_working_drive = 0;
 
 void initialize_start(void);
 void kernel_main(void);
@@ -53,14 +59,19 @@ void initialize_start(void)
 	keyboard_init();
 	terminal_writestring("Keyboard input initialized.\n");
 
-#ifdef CONFIG_FLOPPY
-	terminal_writestring("Initializing floppy drive...\n");
-	if (floppy_init() == 0) {
-		terminal_writestring("Floppy drive fdrive1 initialized successfully.\n");
-		terminal_writestring("Detecting floppy media...\n");
-		has_working_floppy = floppy_detect_fat12(0);
+#ifdef CONFIG_DRIVE
+	terminal_writestring("Initializing storage drive...\n");
+	if (drive_init(drive) == 0) {
+		printf("Drive %s initialized successfully.\n", drive_name(drive));
+		printf("Checking for %s filesystem...\n", filesystem_name(fs));
+		has_working_drive = check_filesystem(drive, fs);
+		if (has_working_drive == 1) {
+			printf("%s filesystem detected on %s.\n", filesystem_name(fs), drive_name(drive));
+		} else {
+			printf("Filesystem not found.\n");
+		}
 	} else {
-		terminal_writestring("Failed to initialize floppy drive fdrive1.\n");
+		printf("Failed to initialize drive %s.\n", drive_name(drive));
 	}
 #endif
 }
