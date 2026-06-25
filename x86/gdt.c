@@ -22,7 +22,7 @@ static void gdt_set_gate(int num, uint32_t base, uint32_t limit, uint8_t access,
 void gdt_init(void)
 {
 	gp.limit = (sizeof(struct gdt_entry) * 3) - 1;
-	gp.base = (uint32_t) & gdt;
+	gp.base = (uintptr_t) & gdt;
 
 	gdt_set_gate(0, 0, 0, 0, 0);	/* Null descriptor */
 	gdt_set_gate(1, 0, 0xFFFFFFFF, 0x9A, 0xCF);	/* Code segment */

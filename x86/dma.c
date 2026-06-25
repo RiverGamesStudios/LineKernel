@@ -14,7 +14,7 @@
 
 void floppy_dma_init(uint8_t* buffer, uint32_t length, uint8_t mode)
 {
-	uint32_t phys_addr = (uint32_t) buffer;
+	uint32_t phys_addr = (uintptr_t) buffer;
 	uint32_t count = length - 1;	/* DMA expects length - 1 */
 
 	/* Ensure address is in low memory (below 16MB) and doesn't cross 64KB boundary */
