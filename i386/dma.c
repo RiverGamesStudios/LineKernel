@@ -5,17 +5,17 @@
 #include "bios_tools.h"
 #include "panic.h"
 
-#define DMA_MASK_REG			0x0A
-#define DMA_MODE_REG			0x0B
-#define DMA_CLEAR_FF_REG		0x0C
-#define DMA_CH2_ADDR_REG		0x04
-#define DMA_CH2_COUNT_REG		0x05
-#define DMA_CH2_PAGE_REG		0x81
+#define DMA_MASK_REG 			0x0A
+#define DMA_MODE_REG 			0x0B
+#define DMA_CLEAR_FF_REG 		0x0C
+#define DMA_CH2_ADDR_REG 		0x04
+#define DMA_CH2_COUNT_REG 		0x05
+#define DMA_CH2_PAGE_REG 		0x81
 
 void floppy_dma_init(uint8_t* buffer, uint32_t length, uint8_t mode)
 {
 	uint32_t phys_addr = (uintptr_t) buffer;
-	uint32_t count = length - 1;	/* DMA expects length - 1 */
+	uint32_t count = length - 1; /* DMA expects length - 1 */
 
 	/* Ensure address is in low memory (below 16MB) and doesn't cross 64KB boundary */
 	if (phys_addr + length > 0xFFFFFF) {
@@ -51,5 +51,5 @@ void floppy_dma_init(uint8_t* buffer, uint32_t length, uint8_t mode)
 	outb(DMA_MODE_REG, mode);
 
 	/* 8. Unmask channel 2 (enable it) */
-	outb(DMA_MASK_REG, 0x00 | 2);	/* bit 2 clear (enable), bits 0-1 channel 2 */
+	outb(DMA_MASK_REG, 0x00 | 2); /* bit 2 clear (enable), bits 0-1 channel 2 */
 }
