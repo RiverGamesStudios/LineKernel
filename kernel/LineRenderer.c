@@ -3,9 +3,7 @@
 
 #include "LineRenderer.h"
 
-size_t terminal_row;
 size_t terminal_column;
-uint8_t terminal_color;
 
 void terminal_enable_cursor(void)
 {
@@ -19,25 +17,6 @@ void terminal_enable_cursor(void)
 		15
 	);
 #endif
-}
-
-void terminal_disable_cursor(void)
-{
-#ifdef CONFIG_VGA_CONSOLE
-	vga_terminal_disable_cursor();
-#endif
-}
-
-void terminal_update_cursor(int x, int y)
-{
-#ifdef CONFIG_VGA_CONSOLE
-	vga_terminal_update_cursor(x, y);
-#endif
-}
-
-void terminal_setcolor(uint8_t color)
-{
-	terminal_color = color;
 }
 
 void terminal_initialize(void)
@@ -131,7 +110,6 @@ void terminal_write_for_char(const char c)
 		terminal_tab();
 	else if (c != 0)
 		terminal_putchar(c);
-	terminal_update_cursor(terminal_column, terminal_row);
 }
 
 // needed for printf
