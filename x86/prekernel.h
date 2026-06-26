@@ -6,6 +6,6 @@
 #include <stdint.h>
 #include "multiboot.h"
 #include "str.h"
-void multiboot_pre_main(uint32_t magic, multiboot_info_t* mbi);
+void multiboot_pre_main(uint32_t magic, multiboot_info_t * mbi);
 
 #endif

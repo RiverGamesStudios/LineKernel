@@ -1,9 +1,9 @@
 /* SPDX-License-Identifier: GPL-3.0-or-later
  * SPDX-FileCopyrightText: Copyright (C) 2026 River Games */
 
-// phoenixcoe got eaten by a grue
-// or he got mauled by a bear, idk
-// it could also possibly be SAM, he seems suspiciously quiet
+/* phoenixcoe got eaten by a grue
+ * or he got mauled by a bear, idk
+ * it could also possibly be SAM, he seems suspiciously quiet */
 #include "kconfig.h"
 #ifdef CONFIG_PS2_KEYBOARD
 #include "ps2_keyboard.h"
@@ -25,9 +25,9 @@ void ps2_kbd_wait_kbd_read(void)
 	while (!(inb(PS2_KBD_STATUS_PORT) & PS2_KBD_STATUS_OUTPUT_FULL));
 }
 
-// i think phoenix also found a way to get eaten by a troll, but that seems less likely than the other two options
-// best regards, 
-// SAM
+/* i think phoenix also found a way to get eaten by a troll, but that seems less likely than the other two options
+ * best regards,
+ * SAM */
 
 void ps2_kbd_keyboard_init(void)
 {
@@ -99,4 +99,4 @@ char ps2_kbd_keyboard_read_scancode_to_ascii(void)
 	return c;
 }
 
-#endif // CONFIG_PS2_KEYBOARD
+#endif /* CONFIG_PS2_KEYBOARD */

@@ -7,7 +7,6 @@
 #include "kconfig.h"
 #include <stdint.h>
 
-#ifdef CONFIG_DRIVE
 #ifdef CONFIG_FLOPPY
 #include "floppy.h"
 #endif
@@ -19,6 +18,7 @@ enum drivesformat {
 
 typedef enum drivesformat drivesformat_t;
 
+#ifdef CONFIG_DRIVE
 int drive_init(drivesformat_t drive);
 int read_drive_sector(drivesformat_t drive, uint32_t lba, uint32_t * out_buf);
 int write_drive_sector(drivesformat_t drive, uint32_t lba, const uint32_t * in_buf);

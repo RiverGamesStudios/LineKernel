@@ -12,7 +12,8 @@ char get_char(void)
 	ready = ps2_kbd_is_kbd_ready_to_read();
 	if (ready == 0) {
 		c = ps2_kbd_keyboard_read_scancode_to_ascii_right_now();
-		return c;
+		if (c != '\0')
+			return c;
 	}
 #endif
 

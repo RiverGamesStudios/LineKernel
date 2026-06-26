@@ -98,7 +98,7 @@ void terminal_write_for_char(const char c)
 		terminal_putchar(c);
 }
 
-// needed for printf
+/* needed for printf */
 void _putchar(char character)
 {
 	terminal_write_for_char(character);

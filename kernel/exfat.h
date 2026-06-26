@@ -4,7 +4,9 @@
 #ifndef __EXFAT_H__
 #define __EXFAT_H__
 
-// this is exfat if you didnt know!
-int exfat_init(int drive);
+#include "LineDrive.h"
+
+/* this is exfat if you didnt know! */
+int exfat_init(drivesformat_t drive);
 
 #endif
