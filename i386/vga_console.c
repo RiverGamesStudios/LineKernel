@@ -40,7 +40,7 @@ static inline uint16_t vga_entry(unsigned char uc, uint8_t color)
 size_t terminal_row;
 extern size_t terminal_column;
 uint8_t terminal_color;
-uint16_t* vga_terminal_buffer = (uint16_t *) VGA_MEMORY;
+volatile uint16_t* vga_terminal_buffer = (uint16_t *) VGA_MEMORY;
 
 void vga_terminal_enable_cursor(uint8_t cursor_start, uint8_t cursor_end)
 {
