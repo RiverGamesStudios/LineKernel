@@ -3,18 +3,23 @@
 
 #include "LineKernel.h"
 
-/* TODO: Remove these "defaults" */
-drivesformat_t drive = fdrive1;
-filesystemformat_t fs = fat12;
+drivesformat_t drive = nodrive;
+filesystemformat_t fs = nofilesystem;
 int has_working_drive = 0;
 char cmdline_str[100];
 
 void handle_single_argument(char* arg) {
+	if (strcmp(arg, "drive=nodrive") == 0) {
+		drive = nodrive;
+	}
 	if (strcmp(arg, "drive=fdrive1") == 0) {
 		drive = fdrive1;
 	}
 	if (strcmp(arg, "fs=fat12") == 0) {
 		fs = fat12;
+	}
+	if (strcmp(arg, "fs=nofilesystem") == 0) {
+		fs = nofilesystem;
 	}
 }
 

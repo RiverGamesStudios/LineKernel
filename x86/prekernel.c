@@ -1,8 +1,4 @@
-#include "LineKernel.h"
-#include "LineRenderer.h"
-#include <stdint.h>
-#include "multiboot.h"
-#include "str.h"
+#include "prekernel.h"
 
 void multiboot_pre_main(uint32_t magic, multiboot_info_t* mbi)
 {
