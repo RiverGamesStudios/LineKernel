@@ -6,6 +6,8 @@
 #include <stdint.h>
 #include "multiboot.h"
 #include "str.h"
-void multiboot_pre_main(uint32_t magic, multiboot_info_t * mbi);
+void multiboot_pre_main(uint32_t magic, uint32_t mbi_address);
+
+#define MULTIBOOT_CHECK_FLAG(flag, bit) ((flag) & (1 << (bit)))
 
 #endif
