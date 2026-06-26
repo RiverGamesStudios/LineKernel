@@ -1,3 +1,6 @@
+/* SPDX-License-Identifier: GPL-3.0-or-later
+ * SPDX-FileCopyrightText: Copyright (C) 2026 River Games */
+
 #include "prekernel.h"
 
 void multiboot_pre_main(uint32_t magic, uint32_t mbi_address)
