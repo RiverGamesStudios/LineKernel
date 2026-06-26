@@ -3,6 +3,8 @@
 
 #include "str.h"
 #include "strlcpy.c"
+#include "strtok.c"
+#include "strcmp.c"
 
 size_t strlen(const char* str)
 {

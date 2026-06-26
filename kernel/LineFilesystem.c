@@ -1,3 +1,6 @@
+/* SPDX-License-Identifier: GPL-3.0-or-later
+ * SPDX-FileCopyrightText: Copyright (C) 2026 River Games */
+
 #include "LineFilesystem.h"
 
 const char* filesystem_name(filesystemformat_t fs)

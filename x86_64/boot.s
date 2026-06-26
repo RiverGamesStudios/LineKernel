@@ -1,7 +1,6 @@
 /* SPDX-License-Identifier: GPL-3.0-or-later
  * SPDX-FileCopyrightText: Copyright (C) 2026 River Games */
 
-/* Keep your existing Multiboot constants and header here */
 .set ALIGN,    1<<0             
 .set MEMINFO,  1<<1             
 .set FLAGS,    ALIGN | MEMINFO  

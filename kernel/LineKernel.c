@@ -1,40 +1,45 @@
 /* SPDX-License-Identifier: GPL-3.0-or-later
  * SPDX-FileCopyrightText: Copyright (C) 2026 River Games */
 
-#include "kernelcheck.h"
-#include "version.h"
-#include "LineRenderer.h"
-#include "LineInput.h"
-#include "LineDrive.h"
-#include "LineFilesystem.h"
-#include "version.h"
-#include "printf.h"
-#ifdef CONFIG_PS2_KEYBOARD
-#include "ps2_keyboard.h"
-#endif
-#ifdef CONFIG_SERIAL_CONSOLE
-#include "serial.h"
-#endif
-#ifdef CONFIG_UART
-#include "uart.h"
-#endif
+#include "LineKernel.h"
 
-#ifdef META_ARCH_x86
-#include "gdt.h"
-#include "idt.h"
-#include "timer.h"
-#endif
-#ifdef CONFIG_FLOPPY
-#include "floppy.h"
-#endif
-
-/* TODO: Set this by kernel command line */
+/* TODO: Remove these "defaults" */
 drivesformat_t drive = fdrive1;
 filesystemformat_t fs = fat12;
 int has_working_drive = 0;
+char cmdline_str[100];
 
-void initialize_start(void);
-void kernel_main(void);
+void handle_single_argument(char* arg) {
+	if (strcmp(arg, "drive=fdrive1") == 0) {
+		drive = fdrive1;
+	}
+	if (strcmp(arg, "fs=fat12") == 0) {
+		fs = fat12;
+	}
+}
+
+void parse_cmdline(char* cmdline) {
+    if (!cmdline) return;
+
+    char* token = cmdline;
+    while (*token != '\0') {
+        while (*token == ' ') token++;
+        if (*token == '\0') break;
+
+        char* arg_start = token;
+
+        while (*token != '\0' && *token != ' ') {
+            token++;
+        }
+
+        if (*token == ' ') {
+            *token = '\0';
+            token++;
+        }
+
+        handle_single_argument(arg_start);
+    }
+}
 
 void initialize_start(void)
 {
@@ -42,7 +47,11 @@ void initialize_start(void)
 	terminal_writestring("Booting LineKernel v" VERSION "...\n\n");
 	terminal_writestring("LineRenderer initialized.\n");
 
-#ifdef META_ARCH_x86
+	terminal_writestring("Command line: ");
+	terminal_writestring(cmdline_str);
+	terminal_writestring("\n");
+
+#ifdef ARCH_i386
 	/* Initialize basic GDT, IDT, and Timer (PIT) */
 	gdt_init();
 	terminal_writestring("GDT initialized.\n");
