@@ -70,20 +70,6 @@ void terminal_backspace(void)
 	write_serial('\b');
 	write_serial(' ');
 	write_serial('\b');
-	if (terminal_column == (size_t)-1) {
-		// ^[1A - Move cursor one line up
-		write_serial('\033');
-		write_serial('[');
-		write_serial('1');
-		write_serial('A');
-		// ^[999C - Move cursor 999 characters right
-		write_serial('\033');
-		write_serial('[');
-		write_serial('9');
-		write_serial('9');
-		write_serial('9');
-		write_serial('C');
-	}
 #endif
 #ifdef CONFIG_UART
 	uart_putchar('\b');

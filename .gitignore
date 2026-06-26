@@ -5,6 +5,7 @@
 LineKernel
 .env
 *.iso
+*.img
 */iso
 *.qcow2
 docs/html
