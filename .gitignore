@@ -2,7 +2,7 @@
 # SPDX-FileCopyrightText: Copyright (C) 2026 River Games
 *.o
 *.gz
-LineKernel
+/LineKernel
 .env
 *.iso
 *.img

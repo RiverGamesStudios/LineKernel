@@ -9,7 +9,7 @@
 #include <stdint.h>
 #include <stddef.h>
 #include "bios_tools.h"
-#include "linecolor_t.h"
+#include "LineKernel/linecolor_t.h"
 
 void vga_terminal_cls(void);
 void vga_terminal_enable_cursor(uint8_t cursor_start, uint8_t cursor_end);

@@ -1,3 +1,6 @@
+/* SPDX-License-Identifier: GPL-3.0-or-later
+ * SPDX-FileCopyrightText: Copyright (C) 2026 River Games */
+
 .global syscall_handler
 .extern syscall_table
 
@@ -17,7 +20,7 @@ syscall_handler:
 
 	# Check boundaries (If EAX >= [number], jump to bad_syscall)
 	# REPLACEMAXSYSCALL
-	cmpl $2, %eax
+	cmpl $4, %eax
 	jae .bad_syscall
 
 	call *syscall_table(,%eax,4)
