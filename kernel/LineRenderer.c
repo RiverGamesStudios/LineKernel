@@ -3,8 +3,6 @@
 
 #include "LineRenderer.h"
 
-size_t terminal_column;
-
 void terminal_enable_cursor(void)
 {
 #ifdef CONFIG_VGA_CONSOLE
@@ -84,6 +82,41 @@ void terminal_tab(void)
 	terminal_putchar(' ');
 	terminal_putchar(' ');
 	terminal_putchar(' ');
+}
+
+void terminal_cls(void)
+{
+#ifdef CONFIG_VGA_CONSOLE
+	vga_terminal_cls();
+#endif
+#ifdef CONFIG_SERIAL_CONSOLE
+	/* \033[2J */
+	write_serial('\033');
+	write_serial('[');
+	write_serial('2');
+	write_serial('J');
+	/* \033[1;1H*/
+	write_serial('\033');
+	write_serial('[');
+	write_serial('1');
+	write_serial(';');
+	write_serial('1');
+	write_serial('H');
+#endif
+#ifdef CONFIG_UART
+	/* \033[2J */
+	uart_putchar('\033');
+	uart_putchar('[');
+	uart_putchar('2');
+	uart_putchar('J');
+	/* \033[1;1H*/
+	uart_putchar('\033');
+	uart_putchar('[');
+	uart_putchar('1');
+	uart_putchar(';');
+	uart_putchar('1');
+	uart_putchar('H');
+#endif
 }
 
 void terminal_write_for_char(const char c)

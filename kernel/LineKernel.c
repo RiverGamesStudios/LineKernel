@@ -24,26 +24,26 @@ void handle_single_argument(char* arg) {
 }
 
 void parse_cmdline(char* cmdline) {
-    if (!cmdline) return;
+	if (!cmdline) return;
 
-    char* token = cmdline;
-    while (*token != '\0') {
-        while (*token == ' ') token++;
-        if (*token == '\0') break;
+	char* token = cmdline;
+	while (*token != '\0') {
+		while (*token == ' ') token++;
+		if (*token == '\0') break;
 
-        char* arg_start = token;
+		char* arg_start = token;
 
-        while (*token != '\0' && *token != ' ') {
-            token++;
-        }
+		while (*token != '\0' && *token != ' ') {
+			token++;
+		}
 
-        if (*token == ' ') {
-            *token = '\0';
-            token++;
-        }
+		if (*token == ' ') {
+			*token = '\0';
+			token++;
+		}
 
-        handle_single_argument(arg_start);
-    }
+		handle_single_argument(arg_start);
+	}
 }
 
 void initialize_start(void)

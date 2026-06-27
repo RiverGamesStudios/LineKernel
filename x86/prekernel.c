@@ -7,7 +7,7 @@ void multiboot_pre_main(uint32_t magic, uint32_t mbi_address)
 {
 	char* cmdline_str_;
 
-	multiboot_info_t* mbi = (multiboot_info_t*)(uintptr_t)mbi_address;
+	multiboot_info_t* mbi = (multiboot_info_t *) (uintptr_t) mbi_address;
 
 	if (magic != MULTIBOOT_BOOTLOADER_MAGIC)
 		return;

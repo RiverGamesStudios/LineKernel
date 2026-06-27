@@ -46,4 +46,6 @@ void terminal_disable_cursor(void);
 
 void terminal_update_cursor(int x, int y);
 
+void terminal_cls(void);
+
 #endif

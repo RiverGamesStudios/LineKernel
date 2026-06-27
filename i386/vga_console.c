@@ -4,26 +4,7 @@
 #include "vga_console.h"
 #ifdef CONFIG_VGA_CONSOLE
 
-enum vga_color {
-	VGA_COLOR_BLACK = 0,
-	VGA_COLOR_BLUE = 1,
-	VGA_COLOR_GREEN = 2,
-	VGA_COLOR_CYAN = 3,
-	VGA_COLOR_RED = 4,
-	VGA_COLOR_MAGENTA = 5,
-	VGA_COLOR_BROWN = 6,
-	VGA_COLOR_LIGHT_GREY = 7,
-	VGA_COLOR_DARK_GREY = 8,
-	VGA_COLOR_LIGHT_BLUE = 9,
-	VGA_COLOR_LIGHT_GREEN = 10,
-	VGA_COLOR_LIGHT_CYAN = 11,
-	VGA_COLOR_LIGHT_RED = 12,
-	VGA_COLOR_LIGHT_MAGENTA = 13,
-	VGA_COLOR_LIGHT_BROWN = 14,
-	VGA_COLOR_WHITE = 15,
-};
-
-static inline uint8_t vga_entry_color(enum vga_color fg, enum vga_color bg)
+static inline uint8_t vga_entry_color(linecolor_t fg, linecolor_t bg)
 {
 	return fg | bg << 4;
 }
@@ -37,10 +18,29 @@ static inline uint16_t vga_entry(unsigned char uc, uint8_t color)
 #define VGA_LINES   25
 #define VGA_WIDTH   80
 
-size_t terminal_row;
-extern size_t terminal_column;
-uint8_t terminal_color;
+size_t vga_terminal_row;
+size_t vga_terminal_column;
+uint8_t vga_terminal_color;
 volatile uint16_t* vga_terminal_buffer = (uint16_t *) VGA_MEMORY;
+
+void vga_terminal_cls(void)
+{
+	vga_terminal_row = 0;
+	vga_terminal_column = 0;
+
+	for (size_t y = 0; y < VGA_LINES; y++) {
+		for (size_t x = 0; x < VGA_WIDTH; x++) {
+			const size_t index = y * VGA_WIDTH + x;
+
+			vga_terminal_buffer[index] = vga_entry(' ', vga_terminal_color);
+		}
+	}
+}
+
+void vga_terminal_setcolor(linecolor_t fg_color, linecolor_t bg_color)
+{
+	vga_terminal_color = vga_entry_color(fg_color, bg_color);
+}
 
 void vga_terminal_enable_cursor(uint8_t cursor_start, uint8_t cursor_end)
 {
@@ -63,17 +63,9 @@ void vga_terminal_update_cursor(int x, int y)
 
 void vga_terminal_initialize(void)
 {
-	terminal_row = 0;
-	terminal_column = 0;
-	terminal_color = vga_entry_color(VGA_COLOR_LIGHT_GREY, VGA_COLOR_BLACK);
+	vga_terminal_color = vga_entry_color(COLOR_LIGHT_GREY, COLOR_BLACK);
 
-	for (size_t y = 0; y < VGA_LINES; y++) {
-		for (size_t x = 0; x < VGA_WIDTH; x++) {
-			const size_t index = y * VGA_WIDTH + x;
-
-			vga_terminal_buffer[index] = vga_entry(' ', terminal_color);
-		}
-	}
+	vga_terminal_cls();
 }
 
 void vga_terminal_putentryat(char c, uint8_t color, size_t x, size_t y)
@@ -97,49 +89,49 @@ void vga_terminal_scroll(void)
 	for (size_t x = 0; x < VGA_WIDTH; x++) {
 		size_t index = (VGA_LINES - 1) * VGA_WIDTH + x;
 
-		vga_terminal_buffer[index] = vga_entry(' ', terminal_color);
+		vga_terminal_buffer[index] = vga_entry(' ', vga_terminal_color);
 	}
 }
 
 void vga_terminal_putchar(char c)
 {
-	vga_terminal_putentryat(c, terminal_color, terminal_column, terminal_row);
-	if (++terminal_column == VGA_WIDTH) {
-		terminal_column = 0;
-		if (++terminal_row == VGA_LINES) {
+	vga_terminal_putentryat(c, vga_terminal_color, vga_terminal_column, vga_terminal_row);
+	if (++vga_terminal_column == VGA_WIDTH) {
+		vga_terminal_column = 0;
+		if (++vga_terminal_row == VGA_LINES) {
 			vga_terminal_scroll();
-			terminal_row = VGA_LINES - 1;
+			vga_terminal_row = VGA_LINES - 1;
 		}
 	}
-	vga_terminal_update_cursor(terminal_column, terminal_row);
+	vga_terminal_update_cursor(vga_terminal_column, vga_terminal_row);
 }
 
 void vga_terminal_newline(void)
 {
-	terminal_column = 0;
-	if (++terminal_row == VGA_LINES) {
+	vga_terminal_column = 0;
+	if (++vga_terminal_row == VGA_LINES) {
 		vga_terminal_scroll();
-		terminal_row = VGA_LINES - 1;
+		vga_terminal_row = VGA_LINES - 1;
 	}
-	vga_terminal_update_cursor(terminal_column, terminal_row);
+	vga_terminal_update_cursor(vga_terminal_column, vga_terminal_row);
 }
 
 void vga_terminal_backspace(void)
 {
-	if (terminal_column == 0 && terminal_row == 0)
+	if (vga_terminal_column == 0 && vga_terminal_row == 0)
 		return;
 
-	if (terminal_column == 0) {
-		terminal_row--;
-		terminal_column = VGA_WIDTH - 1;
+	if (vga_terminal_column == 0) {
+		vga_terminal_row--;
+		vga_terminal_column = VGA_WIDTH - 1;
 	} else {
-		terminal_column--;
+		vga_terminal_column--;
 	}
 
-	const size_t index = terminal_row * VGA_WIDTH + terminal_column;
+	const size_t index = vga_terminal_row * VGA_WIDTH + vga_terminal_column;
 
-	vga_terminal_buffer[index] = vga_entry(' ', terminal_color);
-	vga_terminal_update_cursor(terminal_column, terminal_row);
+	vga_terminal_buffer[index] = vga_entry(' ', vga_terminal_color);
+	vga_terminal_update_cursor(vga_terminal_column, vga_terminal_row);
 }
 
 #endif

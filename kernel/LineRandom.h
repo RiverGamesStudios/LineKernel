@@ -16,7 +16,7 @@ rand_t rand_crand(void);
 int rand(void);
 
 typedef enum {
-    RAND_CRAND,
+	RAND_CRAND,
 } randtype_t;
 
 randtype_t get_rand_type(void);

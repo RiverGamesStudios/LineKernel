@@ -12,8 +12,8 @@
 #endif
 
 enum drivesformat {
-    nodrive,
-    fdrive1,
+	nodrive,
+	fdrive1,
 };
 
 typedef enum drivesformat drivesformat_t;

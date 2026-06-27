@@ -9,10 +9,12 @@
 #include <stdint.h>
 #include <stddef.h>
 #include "bios_tools.h"
+#include "linecolor_t.h"
 
+void vga_terminal_cls(void);
 void vga_terminal_enable_cursor(uint8_t cursor_start, uint8_t cursor_end);
 void vga_terminal_update_cursor(int x, int y);
-void vga_terminal_setcolor(uint8_t color);
+void vga_terminal_setcolor(linecolor_t fg_color, linecolor_t bg_color);
 void vga_terminal_initialize(void);
 void vga_terminal_putentryat(char c, uint8_t color, size_t x, size_t y);
 void vga_terminal_putchar(char c);

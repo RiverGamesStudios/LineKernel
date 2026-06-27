@@ -9,8 +9,8 @@
 #include "kconfig.h"
 
 enum filesystemformat {
-    nofilesystem,
-    fat12,
+	nofilesystem,
+	fat12,
 };
 
 typedef enum filesystemformat filesystemformat_t;

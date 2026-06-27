@@ -30,7 +30,7 @@
 		#error "Unknown RISC-V bit width"
 	#endif
 #else
-    #error "Unsupported architecture"
+	#error "Unsupported architecture"
 #endif
 
 #endif

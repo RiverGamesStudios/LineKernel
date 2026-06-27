@@ -8,3 +8,8 @@ void we_are_running(void)
 	terminal_writestring("Target: " ARCH);
 	terminal_writestring("\n\n");
 }
+
+void nothing(void)
+{
+	return;
+}

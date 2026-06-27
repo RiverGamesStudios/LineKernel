@@ -8,6 +8,7 @@
 #include "version.h"
 #include "LineRenderer.h"
 #include "LineInput.h"
+#include "LineColor.h"
 #include "LineDrive.h"
 #include "LineFilesystem.h"
 #include "version.h"
