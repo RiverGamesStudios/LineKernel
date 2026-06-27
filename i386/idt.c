@@ -62,6 +62,8 @@ extern void irq13(void);
 extern void irq14(void);
 extern void irq15(void);
 
+extern void syscall_handler(void);
+
 static void idt_set_gate(uint8_t num, uint32_t base, uint16_t sel, uint8_t flags)
 {
 	idt[num].base_low = (base & 0xFFFF);
@@ -167,6 +169,9 @@ void idt_init(void)
 	idt_set_gate(45, (uintptr_t) irq13, 0x08, 0x8E);
 	idt_set_gate(46, (uintptr_t) irq14, 0x08, 0x8E);
 	idt_set_gate(47, (uintptr_t) irq15, 0x08, 0x8E);
+
+	/* Syscall handling! */
+	idt_set_gate(128, (uintptr_t) syscall_handler, 0x08, 0xEF);
 
 	__asm__ volatile ("lidt %0"::"m" (idtp));
 }

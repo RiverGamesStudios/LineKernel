@@ -97,6 +97,9 @@ void kernel_main(void)
 	terminal_writestring("Core services initialized.\n\n");
 	we_are_running();
 
+	syscall3(SYS_print2, (long)"LineKernel!\n", 0, 0);
+	syscall3(SYS_print1, 0, 0, 0);
+
 	for (;;) {
 		terminal_write_for_char(get_char());
 	}

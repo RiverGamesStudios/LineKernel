@@ -6,6 +6,7 @@
 
 #include "kernelcheck.h"
 #include "version.h"
+#include "syscall.h"
 #include "LineRenderer.h"
 #include "LineInput.h"
 #include "LineColor.h"
