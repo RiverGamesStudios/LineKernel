@@ -13,5 +13,6 @@
 #define SYS_termcolor   1
 #define SYS_termscolor  2
 #define SYS_termclear   3
+#define SYS_termcursor  4
 
 #endif

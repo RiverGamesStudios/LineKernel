@@ -37,9 +37,16 @@ DEFINECALL(termclear, void)
 	return 0;
 }
 
+DEFINECALL(termcursor, int x, int y)
+{
+	terminal_update_cursor(x, y);
+	return 0;
+}
+
 void* syscall_table[] = {
 	COMMAND2TABLE(print2),
 	COMMAND2TABLE(termcolor),
 	COMMAND2TABLE(termscolor),
 	COMMAND2TABLE(termclear),
+	COMMAND2TABLE(termcursor),
 };

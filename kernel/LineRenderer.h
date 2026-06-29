@@ -38,11 +38,13 @@ void terminal_write(const char* data, size_t size);
 
 void terminal_writestring(const char* data);
 
+typedef void (*writecharfunc_t)(char);
+
+void terminal_writeintcustom(int data, writecharfunc_t func);
+
 void terminal_writeint(int data);
 
 void terminal_enable_cursor(void);
-
-void terminal_disable_cursor(void);
 
 void terminal_update_cursor(int x, int y);
 
