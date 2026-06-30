@@ -1,9 +1,12 @@
+/* SPDX-License-Identifier: GPL-3.0-or-later
+ * SPDX-FileCopyrightText: Copyright (C) 2026 River Games */
+
 #ifndef __LINECOLOR_H__
 #define __LINECOLOR_H__
 
 #include "kconfig.h"
 #include "version.h"
-#include "linecolor_t.h"
+#include "LineKernel/linecolor_t.h"
 
 #define DEFAULT_FOREGROUND COLOR_LIGHT_GREY
 #define DEFAULT_BACKGROUND COLOR_BLACK
