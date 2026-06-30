@@ -4,6 +4,10 @@
 #ifndef _LineKernel___SYSCALL_H__
 #define _LineKernel___SYSCALL_H__
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include <LineKernel/syscall/syscall_ids.h>
 
 #ifdef ARCH_i386
@@ -20,6 +24,10 @@ static inline long syscall3(long num, long arg1, long arg2, long arg3)
 }
 #else
 #error "This arch doesn't support syscalls!"
+#endif
+
+#ifdef __cplusplus
+}
 #endif
 
 #endif
