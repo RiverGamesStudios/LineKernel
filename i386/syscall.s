@@ -27,7 +27,7 @@ syscall_handler:
 	jmp .finish
 
 .bad_syscall:
-	# Return -255 (indicating bad syscall, CLineB should transform this into ENOSYS) in EAX
+	# Return -255 (-ENOSYS) in EAX
 	movl $-255, %eax
 
 .finish:
