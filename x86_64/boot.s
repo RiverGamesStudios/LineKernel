@@ -115,7 +115,7 @@ _start:
 
 	/* 8. Far Jump to 64-bit Long Mode code segment */
 	/* Note: Explicitly using ljmpl tells the assembler to use a 32-bit operand
-	   for the jump while still generating the correct AT&T syntax. */
+		for the jump while still generating the correct AT&T syntax. */
 	ljmpl $0x08, $_start64
 
 .no_cpuid:

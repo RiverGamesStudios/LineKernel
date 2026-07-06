@@ -4,10 +4,6 @@
 #ifndef _LineKernel___LINECOLOR_T_H__
 #define _LineKernel___LINECOLOR_T_H__
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 #if defined(__LineCore__) && !defined(_CLineB___LINECORE_CONSOLE_H__)
 #error "Don't include this, include <LineCore/console.h>!"
 #endif
@@ -32,9 +28,5 @@ enum linecolor {
 };
 
 typedef enum linecolor linecolor_t;
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif

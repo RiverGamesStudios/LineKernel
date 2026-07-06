@@ -1,13 +1,20 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 # SPDX-FileCopyrightText: Copyright (C) 2026 River Games
 
+lineindentf()
+{
+    indent -bad -bap -br -ce -cdw -npcs -ncs -nbc -npsl -brs -blf -ut -l100 -ngts -fca -fnc -nlps -ncdw -i4 -ts4 -nlp -pal $1
+    rm $1~
+}
+
 lineindent()
 {
-    indent -bad -bap -br -ce -cdw -npcs -ncs -nbc -npsl -brs -blf -ut -l100 -ngts -fca -fnc -nlps -ncdw -i4 -ts4 -nlp -pal $1/*.c $1/*.h
-    rm $1/*.c~ $1/*.h~
+    lineindentf $1/*.c
+    lineindentf $1/*.h
 }
 
 lineindent i386
 lineindent x86
 lineindent x86_64
 lineindent riscv64
+lineindentf tools/*.c

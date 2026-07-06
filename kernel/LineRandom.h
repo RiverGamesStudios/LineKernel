@@ -6,12 +6,9 @@
 
 #include "kconfig.h"
 #include <stdint.h>
+#include "LineKernel/rand_max.h"
 
-/* I'll have to figure out a way to do this with uint64_t. */
-#define RAND_MAX UINT16_MAX
-typedef uint32_t rand_t;
-
-rand_t rand_crand(void);
+int rand_crand(void);
 
 int rand(void);
 

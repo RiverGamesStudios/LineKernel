@@ -14,8 +14,14 @@ ifneq (x$(META_ARCH),x)
 endif
 
 include kernel/Makefile
+ifneq ($(META_ARCH),)
+	META_ARCH_FLAGS = -I$(META_ARCH) -DMETA_ARCH_$(META_ARCH)
+else
+	META_ARCH_FLAGS =
+endif
+
 CFLAGS ?= -O2 -pipe
-CFLAGS += -Ikernel -Ithird-party -I$(ARCH) -I$(META_ARCH) -Iinclude -DMETA_ARCH_$(META_ARCH) -DARCH_$(ARCH) -DARCH=\"$(ARCH)\" -DVERSION=\"$(VERSION)\" -std=gnu99 -ffreestanding -Wall -Wextra -Wmissing-declarations -fstack-protector-all $(ARCH_CFLAGS)
+CFLAGS += -Ikernel -Ithird-party -I$(ARCH) $(META_ARCH_FLAGS) -Iinclude -DARCH_$(ARCH) -DARCH=\"$(ARCH)\" -DVERSION=\"$(VERSION)\" -std=gnu99 -ffreestanding -Wall -Wextra -Wmissing-declarations -fstack-protector-all $(ARCH_CFLAGS)
 OBJ = $(ARCH_OBJ) $(META_ARCH_OBJ) $(KERNEL_OBJ)
 
 MENUCONFIG ?= kconfig-mconf
@@ -26,11 +32,14 @@ all:
 	make kernel/kconfig.mk kernel/kconfig.h
 	make LineKernel LineKernel.gz
 
-kernel/kconfig.h: .config
-	python3 ./tools/config2header.py .config > kernel/kconfig.h
+tools/config2%: ./tools/config2%.c
+	cc $< -o $@
 
-kernel/kconfig.mk: .config
-	python3 ./tools/config2makefile.py .config > kernel/kconfig.mk
+kernel/kconfig.h: .config tools/config2header
+	tools/config2header .config > kernel/kconfig.h
+
+kernel/kconfig.mk: .config tools/config2makefile
+	tools/config2makefile .config > kernel/kconfig.mk
 
 Kconfig: Kconfig.template
 	cp Kconfig.template Kconfig
@@ -49,7 +58,7 @@ allnoconfig: Kconfig
 xconfig: Kconfig
 	$(XCONFIG) Kconfig
 
-# todo: remove -lgcc
+# TODO: make this more portable, don't rely on libgcc.
 LineKernel: $(OBJ)
 	$(CC) -o LineKernel $(LDFLAGS) $(OBJ) -lgcc
 
@@ -73,7 +82,7 @@ run-iso: LineKernel.iso
 	$(QEMU) -cdrom LineKernel.iso $(QEMUARGS)
 
 clean:
-	rm -f LineKernel LineKernel.gz iso/boot/LineKernel.gz LineKernel.iso $(OBJ) kernel/kconfig.h kernel/kconfig.mk
+	rm -f LineKernel LineKernel.gz iso/boot/LineKernel.gz LineKernel.iso $(OBJ) kernel/kconfig.h kernel/kconfig.mk tools/config2header tools/config2makefile
 
 distclean: clean
 	rm -rf Kconfig .config .config.old kernel/LineKernel.qcow2 docs/
