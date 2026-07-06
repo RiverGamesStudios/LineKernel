@@ -1,6 +1,5 @@
 Results I got while simply just searching for "TODO".
 
-- [`Makefile:61`](Makefile) - TODO: make this more portable, don't rely on libgcc.
 - [`timer.c:4`](i386/timer.c) - TODO: Make this more portable(?)
 - [`syscall_init.c:27`](kernel/syscall_init.c) - TODO: change from Machine Mode to Supervisor Mode on RISC-V eventually. It is not essential(?) but we should still do it.
 - [`Kconfig:4`](x86/Kconfig) - TODO: move console here

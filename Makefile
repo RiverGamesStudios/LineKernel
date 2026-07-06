@@ -58,7 +58,6 @@ allnoconfig: Kconfig
 xconfig: Kconfig
 	$(XCONFIG) Kconfig
 
-# TODO: make this more portable, don't rely on libgcc.
 LineKernel: $(OBJ)
 	$(CC) -o LineKernel $(LDFLAGS) $(OBJ) -lgcc
 
