@@ -1,10 +1,14 @@
 # How to port an architecture to LineKernel
-1. Create proper `boot.s`, `linker.ld` for arch.
-2. Create a Makefile with `CC`, `AS`, `LDFLAGS`, `ARCH_OBJ`, and `QEMU`.
-3. Create Kconfig for enabling/disabling features specific to the arch.
-4. You probably want a console backend. Write one for serial or whatever your arch uses.
-5. Get a kernel command line so you can specify what drive/what filesystem
-6. Port syscalls
+1. Add your arch to [LineArch](https://github.com/RiverGamesStudios/LineArch).
+    Create a `(arch).json` file with `CCPREFIX` (ex. `i686-elf-`), `CFLAGS` (arch specific CFLAGS), and `QEMU` (qemu for this machine).
+    Then, add your `(arch).json` to `gen.sh`, adding it to both the `genmake` and `gensh` commands.
+    Now, you can submit your patch. If it is properly formatted it will probably be submitted.
+2. Create proper `boot.s`, `linker.ld` for arch.
+3. Create a Makefile with `LDFLAGS` and `ARCH_OBJ`.
+4. Create Kconfig for enabling/disabling features specific to the arch.
+5. You probably want a console backend. Write one for serial or whatever your arch uses.
+6. Get a kernel command line so you can specify what drive/what filesystem
+7. Port syscalls
 
 # Requirements
 These functions/variables MUST be defined.

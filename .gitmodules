@@ -1,0 +1,3 @@
+[submodule "arches"]
+	path = arches
+	url = https://github.com/RiverGamesStudios/LineArch.git
