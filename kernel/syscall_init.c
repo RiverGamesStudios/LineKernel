@@ -5,7 +5,7 @@
 
 extern void syscall_handler(void);
 
-void trap_init(void)
+void syscall_init(void)
 {
 #if defined(ARCH_x86_64)
 	uint32_t efer_low, efer_high;

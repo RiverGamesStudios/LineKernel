@@ -4,6 +4,6 @@
 #ifndef __SYSCALL_INIT_H__
 #define __SYSCALL_INIT_H__
 
-void trap_init(void);
+void syscall_init(void);
 
 #endif

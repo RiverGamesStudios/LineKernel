@@ -88,6 +88,9 @@ void initialize_start(void)
 		printf("Failed to initialize drive %s.\n", drive_name(drive));
 	}
 #endif
+
+	syscall_init();
+	terminal_writestring("Syscalls initialized.\n");
 }
 
 void kernel_main(void)
