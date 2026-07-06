@@ -1,7 +1,7 @@
 # [<img src="https://rivergames.ca/src/img/LK_COLOUR.png" alt="LineKernel" width="512"/>](https://wiki.rivergames.ca/wiki/LineKernel)
-[LineKernel](https://wiki.rivergames.ca/wiki/LineKernel) is a kernel unlike any other UNIX-Like kernel. LineKernel is a Monolithic kernel designed for x86(_64) built from scratch for the [LineCore Operating System](https://wiki.rivergames.ca/wiki/LineCoreOS).
+[LineKernel](https://wiki.rivergames.ca/wiki/LineKernel) is a kernel unlike any other UNIX-Like kernel. LineKernel is a Monolithic kernel designed for real hardware, built from scratch, for the [LineCore Operating System](https://wiki.rivergames.ca/wiki/LineCoreOS).
 
-This kernel is for the LineCoreOS [x86(_64)](https://wiki.rivergames.ca/wiki/History_of_LineCoreOS#x86) version.
+This kernel is for the LineCoreOS [x86](https://wiki.rivergames.ca/wiki/History_of_LineCoreOS#x86) version.
 
 ## Features in Development
 - Kernel
@@ -13,6 +13,7 @@ This kernel is for the LineCoreOS [x86(_64)](https://wiki.rivergames.ca/wiki/His
 + kconfig-frontends
 
 ### Makefile Instructions
+Note that you can also use `make xconfig` for X config, `make allyesconfig` for All Yes config, `make allnoconfig` for All No config.
 + **For i386**
     + `make menuconfig ARCH=i386` - Configure LineKernel
     + `make ARCH=i386` - Compile using i686-elf for i386

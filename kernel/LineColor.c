@@ -1,3 +1,6 @@
+/* SPDX-License-Identifier: GPL-3.0-or-later
+ * SPDX-FileCopyrightText: Copyright (C) 2026 River Games */
+
 #include "LineColor.h"
 #ifdef CONFIG_VGA_CONSOLE
 #include "vga_console.h"
@@ -49,7 +52,9 @@ void terminal_setcolor(linecolor_t fg_color, linecolor_t bg_color)
 
 void terminal_resetcolor(void)
 {
+#ifdef CONFIG_VGA_CONSOLE
 	vga_terminal_setcolor(DEFAULT_FOREGROUND, DEFAULT_BACKGROUND);
+#endif
 #ifdef CONFIG_SERIAL_CONSOLE
 	write_serial('\033');
 	write_serial('[');

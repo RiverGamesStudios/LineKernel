@@ -11,6 +11,7 @@
 #include "LineColor.h"
 #include "LineDrive.h"
 #include "LineFilesystem.h"
+#include "syscall_init.h"
 #include "version.h"
 #include "printf.h"
 #ifdef CONFIG_PS2_KEYBOARD

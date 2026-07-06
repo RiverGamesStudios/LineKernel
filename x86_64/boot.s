@@ -115,7 +115,7 @@ _start:
 
 	/* 8. Far Jump to 64-bit Long Mode code segment */
 	/* Note: Explicitly using ljmpl tells the assembler to use a 32-bit operand
-	   for the jump while still generating the correct AT&T syntax. */
+		for the jump while still generating the correct AT&T syntax. */
 	ljmpl $0x08, $_start64
 
 .no_cpuid:
@@ -148,9 +148,9 @@ _start64:
 .section .rodata
 .align 8
 gdt64:
-	.quad 0x0000000000000000      /* Null Descriptor */
-	.quad 0x00209A0000000000      /* 64-bit Code Descriptor (Exec/Read, Long Mode bit) */
-	.quad 0x0000920000000000      /* 64-bit Data Descriptor (Read/Write) */
+	.quad 0x0000000000000000 /* Null Descriptor */
+	.quad 0x00209A0000000000 /* 64-bit Code Descriptor (Exec/Read, Long Mode bit) */
+	.quad 0x0000920000000000 /* 64-bit Data Descriptor (Read/Write) */
 gdt64_pointer:
-	.word . - gdt64 - 1           /* GDT Limit */
-	.long gdt64                   /* GDT Base Address */
+	.word . - gdt64 - 1 /* GDT Limit */
+	.long gdt64 /* GDT Base Address */

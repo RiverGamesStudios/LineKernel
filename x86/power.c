@@ -10,7 +10,7 @@ void reboot(void)
 
 void poweroff(void)
 {
-	/* TODO */
+	/* TODO: ACPI */
 }
 
 void halt(void)

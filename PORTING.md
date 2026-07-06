@@ -4,6 +4,7 @@
 3. Create Kconfig for enabling/disabling features specific to the arch.
 4. You probably want a console backend. Write one for serial or whatever your arch uses.
 5. Get a kernel command line so you can specify what drive/what filesystem
+6. Port syscalls
 
 # Requirements
 These functions/variables MUST be defined.

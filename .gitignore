@@ -2,7 +2,7 @@
 # SPDX-FileCopyrightText: Copyright (C) 2026 River Games
 *.o
 *.gz
-LineKernel
+/LineKernel
 .env
 *.iso
 *.img
@@ -15,3 +15,5 @@ docs/man
 /Kconfig
 kconfig.h
 kconfig.mk
+tools/config2header
+tools/config2makefile

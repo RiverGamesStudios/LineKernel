@@ -17,6 +17,33 @@ void terminal_enable_cursor(void)
 #endif
 }
 
+void terminal_update_cursor(int x, int y)
+{
+#ifdef CONFIG_VGA_CONSOLE
+	vga_terminal_update_cursor(x, y);
+	vga_terminal_row = y;
+	vga_terminal_column = x;
+#endif
+#ifdef CONFIG_SERIAL_CONSOLE
+	/* \033[<Y>;<X>H */
+	write_serial('\033');
+	write_serial('[');
+	terminal_writeintcustom(y + 1, write_serial);
+	write_serial(';');
+	terminal_writeintcustom(x + 1, write_serial);
+	write_serial('H');
+#endif
+#ifdef CONFIG_UART
+	/* \033[<Y>;<X>H */
+	uart_putchar('\033');
+	uart_putchar('[');
+	terminal_writeintcustom(y + 1, uart_putchar);
+	uart_putchar(';');
+	terminal_writeintcustom(x + 1, uart_putchar);
+	uart_putchar('H');
+#endif
+}
+
 void terminal_initialize(void)
 {
 #ifdef CONFIG_VGA_CONSOLE
@@ -146,6 +173,18 @@ void terminal_write(const char* data, size_t size)
 void terminal_writestring(const char* data)
 {
 	terminal_write(data, strlen(data));
+}
+
+void terminal_writeintcustom(int data, writecharfunc_t func)
+{
+	if (data < 0) {
+		func('-');
+		data = -data;
+	}
+	if (data / 10) {
+		terminal_writeintcustom(data / 10, func);
+	}
+	func((data % 10) + '0');
 }
 
 void terminal_writeint(int data)

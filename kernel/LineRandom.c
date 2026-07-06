@@ -9,10 +9,10 @@
 /* https://www.open-std.org/jtc1/sc22/wg14/www/docs/n1570.pdf */
 static unsigned long int next = 'L' + 'I' + 'N' + 'E' + 'C' + 'O' + 'R' + 'E';
 
-rand_t rand_crand(void)
+int rand_crand(void)
 {
 	next = next * 1103515245 + 12345;
-	return (rand_t)(next / (RAND_MAX * 2 + 2)) % (RAND_MAX + 1);
+	return (next / (RAND_MAX * 2 + 2)) % (RAND_MAX + 1);
 }
 /* https://www.open-std.org/jtc1/sc22/wg14/www/docs/n1570.pdf */
 

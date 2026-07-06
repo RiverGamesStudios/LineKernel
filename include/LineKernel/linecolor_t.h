@@ -1,5 +1,12 @@
-#ifndef __LINECOLOR_T_H__
-#define __LINECOLOR_T_H__
+/* SPDX-License-Identifier: GPL-3.0-or-later
+ * SPDX-FileCopyrightText: Copyright (C) 2026 River Games */
+
+#ifndef _LineKernel___LINECOLOR_T_H__
+#define _LineKernel___LINECOLOR_T_H__
+
+#if defined(__LineCore__) && !defined(_CLineB___LINECORE_CONSOLE_H__)
+#error "Don't include this, include <LineCore/console.h>!"
+#endif
 
 enum linecolor {
 	COLOR_BLACK = 0,

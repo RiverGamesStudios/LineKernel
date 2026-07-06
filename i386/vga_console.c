@@ -14,9 +14,9 @@ static inline uint16_t vga_entry(unsigned char uc, uint8_t color)
 	return (uint16_t) uc | (uint16_t) color << 8;
 }
 
-#define VGA_MEMORY  0xB8000
-#define VGA_LINES   25
-#define VGA_WIDTH   80
+#define VGA_MEMORY	0xB8000
+#define VGA_LINES	25
+#define VGA_WIDTH	80
 
 size_t vga_terminal_row;
 size_t vga_terminal_column;
@@ -49,6 +49,17 @@ void vga_terminal_enable_cursor(uint8_t cursor_start, uint8_t cursor_end)
 
 	outb(0x3D4, 0x0B);
 	outb(0x3D5, (inb(0x3D5) & 0xE0) | cursor_end);
+}
+
+uint16_t vga_terminal_cursor_position(void)
+{
+	uint16_t pos = 0;
+
+	outb(0x3D4, 0x0F);
+	pos |= inb(0x3D5);
+	outb(0x3D4, 0x0E);
+	pos |= ((uint16_t) inb(0x3D5)) << 8;
+	return pos;
 }
 
 void vga_terminal_update_cursor(int x, int y)
