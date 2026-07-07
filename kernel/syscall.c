@@ -5,6 +5,7 @@
 #include <stdint.h>
 #include "LineRenderer.h"
 #include "LineColor.h"
+#include "LineFilesystem.h"
 
 #define COMMAND2TABLE(name) [SYS_##name] = sys_##name
 
@@ -43,10 +44,52 @@ DEFINECALL(termcursor, int x, int y)
 	return 0;
 }
 
+DEFINECALL(close, int fileno)
+{
+	return close_fileno(fileno);
+}
+
+DEFINECALL(open, uintptr_t filename)
+{
+	return open_fileno((const char*)filename);
+}
+
+DEFINECALL(rename, uintptr_t oldpath, uintptr_t newpath)
+{
+	return rename_filepath((const char*)oldpath, (const char*)newpath);
+}
+
+DEFINECALL(makedir, uintptr_t path)
+{
+	return makedir((const char*)path);
+}
+
+DEFINECALL(removedir, uintptr_t path)
+{
+	return removedir((const char*)path);
+}
+
+DEFINECALL(write, int fileno, uintptr_t buf, size_t nbyte)
+{
+	return write_fileno(fileno, (const void*)buf, nbyte);
+}
+
+DEFINECALL(remove, uintptr_t filename)
+{
+	return removefile((const char*)filename);
+}
+
 void* syscall_table[] = {
 	COMMAND2TABLE(print2),
 	COMMAND2TABLE(termcolor),
 	COMMAND2TABLE(termscolor),
 	COMMAND2TABLE(termclear),
 	COMMAND2TABLE(termcursor),
+	COMMAND2TABLE(close),
+	COMMAND2TABLE(open),
+	COMMAND2TABLE(rename),
+	COMMAND2TABLE(makedir),
+	COMMAND2TABLE(removedir),
+	COMMAND2TABLE(write),
+	COMMAND2TABLE(remove),
 };

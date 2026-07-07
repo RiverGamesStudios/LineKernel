@@ -3,6 +3,33 @@
 
 #include "LineKernel.h"
 
+#include "kernelcheck.h"
+#include "version.h"
+#include "LineRenderer.h"
+#include "LineInput.h"
+#include "LineColor.h"
+#include "syscall_init.h"
+#include "version.h"
+#include "LineKernel/syscall.h"
+#ifdef CONFIG_PS2_KEYBOARD
+#include "ps2_keyboard.h"
+#endif
+#ifdef CONFIG_SERIAL_CONSOLE
+#include "serial.h"
+#endif
+#ifdef CONFIG_UART
+#include "uart.h"
+#endif
+
+#ifdef ARCH_i386
+#include "gdt.h"
+#include "idt.h"
+#include "timer.h"
+#endif
+#ifdef CONFIG_FLOPPY
+#include "floppy.h"
+#endif
+
 drivesformat_t drive = nodrive;
 filesystemformat_t fs = nofilesystem;
 int has_working_drive = 0;
@@ -102,9 +129,10 @@ void kernel_main(void)
 
 	// syscall3(SYS_termclear, 0, 0, 0);
 	// syscall3(SYS_termcolor, COLOR_WHITE, COLOR_BLUE, 0);
-	// syscall3(SYS_print2, (long)"LineKernel!\n", 0, 0);
+	// syscall3(SYS_print2, (uintptr_t)"LineKernel!\n", 0, 0);
 	// syscall3(SYS_termscolor, 0, 0, 0);
 	// syscall3(SYS_termcursor, 3, 3, 0);
+	// syscall3(SYS_write, 2, (uintptr_t)"LineKernel!", 4);
 
 	for (;;) {
 		terminal_write_for_char(get_char());

@@ -16,7 +16,7 @@ syscall_handler:
 
 	# Check boundaries (If RAX >= [number], jump to bad_syscall)
 	# REPLACEMAXSYSCALL
-	cmpq $5, %rax
+	cmpq $12, %rax
 	jae .bad_syscall
 
 	# Call syscall handler from table (pointers are 8 bytes on x86_64)

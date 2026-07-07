@@ -14,5 +14,12 @@
 #define SYS_termscolor  2
 #define SYS_termclear   3
 #define SYS_termcursor  4
+#define SYS_close       5
+#define SYS_open        6
+#define SYS_rename      7
+#define SYS_makedir     8
+#define SYS_removedir   9
+#define SYS_write      10
+#define SYS_remove     11
 
 #endif
