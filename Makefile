@@ -33,8 +33,8 @@ CONSOLECONFIG ?= kconfig-conf
 XCONFIG ?= kconfig-qconf
 
 all:
-	make kernel/kconfig.mk kernel/kconfig.h
-	make LineKernel LineKernel.gz
+	$(MAKE) kernel/kconfig.mk kernel/kconfig.h
+	$(MAKE) LineKernel LineKernel.gz
 
 tools/config2%: ./tools/config2%.c
 	cc $< -o $@
