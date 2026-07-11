@@ -1,3 +1,6 @@
 [submodule "arches"]
 	path = arches
 	url = https://github.com/RiverGamesStudios/LineArch.git
+[submodule "kconfig"]
+	path = kconfig
+	url = https://github.com/RiverGamesStudios/LineKconfig.git
