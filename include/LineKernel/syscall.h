@@ -10,7 +10,7 @@ extern "C" {
 
 #include <LineKernel/syscall/syscall_ids.h>
 
-#if defined(ARCH_i386)
+#if defined(__i386__)
 static inline long syscall3(long num, long arg1, long arg2, long arg3)
 {
 	long ret;
@@ -22,7 +22,7 @@ static inline long syscall3(long num, long arg1, long arg2, long arg3)
 	);
 	return ret;
 }
-#elif defined(ARCH_x86_64)
+#elif defined(__x86_64__)
 static inline long syscall3(long num, long arg1, long arg2, long arg3)
 {
 	long ret;
@@ -34,7 +34,7 @@ static inline long syscall3(long num, long arg1, long arg2, long arg3)
 	);
 	return ret;
 }
-#elif defined(ARCH_riscv64)
+#elif defined(__riscv) && (__riscv_xlen == 64)
 static inline long syscall3(long num, long arg1, long arg2, long arg3)
 {
 	register long a7 __asm__("a7") = num;

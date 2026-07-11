@@ -50,6 +50,7 @@ int close_fileno(int fileno)
 
 /** @retval -1 Unknown error
  ** @retval -32 No drive
+ ** @retval -9 No such file
  ** @retval other fileno */
 int open_fileno(const char* filename)
 {
