@@ -1,6 +1,9 @@
 /* SPDX-License-Identifier: GPL-3.0-or-later
  * SPDX-FileCopyrightText: Copyright (C) 2026 River Games */
 
+#include "kconfig.h"
+
+#ifdef CONFIG_SERIAL_CONSOLE
 #include "serial.h"
 
 int init_serial(void)
@@ -59,3 +62,4 @@ void write_serial(char a)
 
 	outb(PORT, a);
 }
+#endif

@@ -5,6 +5,7 @@
 #include "strlcpy.c"
 #include "strtok.c"
 #include "strcmp.c"
+#include "c_scan.c"
 
 size_t strlen(const char* str)
 {
