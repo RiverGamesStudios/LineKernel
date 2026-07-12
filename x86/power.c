@@ -2,16 +2,7 @@
  * SPDX-FileCopyrightText: Copyright (C) 2026 River Games */
 
 #include "power.h"
-
-void reboot(void)
-{
-	__asm__ volatile ("jmp 0xFFFF");
-}
-
-void poweroff(void)
-{
-	/* TODO: ACPI */
-}
+#include "bios_tools.h"
 
 void halt(void)
 {
@@ -20,4 +11,18 @@ void halt(void)
 	while (1) {
 		__asm__ volatile ("hlt");
 	}
+}
+
+void reboot(void)
+{
+	uint8_t good = 0x02;
+	while (good & 0x02)
+		good = inb(0x64);
+	outb(0x64, 0xFE);
+	halt();
+}
+
+void poweroff(void)
+{
+	/* TODO: ACPI */
 }
