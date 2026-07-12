@@ -2,7 +2,10 @@
  * SPDX-FileCopyrightText: Copyright (C) 2026 River Games */
 
 #include "power.h"
+
+#ifdef CONFIG_VIRT_MACHINE
 #define SYSCON_ADDR 0x100000
+#endif
 
 void poweroff(void)
 {
