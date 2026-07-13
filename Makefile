@@ -85,8 +85,10 @@ run-iso: LineKernel.iso
 
 clean:
 	rm -f LineKernel LineKernel.gz iso/boot/LineKernel.gz LineKernel.iso $(OBJ) kernel/kconfig.h kernel/kconfig.mk tools/config2header tools/config2makefile
+	cd kconfig; make clean || true
 
 distclean: clean
 	rm -rf Kconfig .config .config.old kernel/LineKernel.qcow2 docs/
+	cd kconfig; make distclean || true
 
 .PHONY: all Kconfig run run-iso clean distclean
