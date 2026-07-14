@@ -3,16 +3,7 @@
 
 #include "panic.h"
 
-#define STANDARD_ERROR_ART 3
-#ifdef ARCH_riscv64
-#define ARCH_ERROR_ART 1
-#else
-#define ARCH_ERROR_ART 0
-#endif
-
-#define ERROR_ART STANDARD_ERROR_ART + ARCH_ERROR_ART
-
-char* error_art[ERROR_ART] = {
+char* error_art[] = {
 /* https://www.asciiart.eu/art/3f48d10c283c85d8 */
 		"   +--------------+\n"
 		"   |.------------.|\n"
@@ -68,6 +59,8 @@ char* error_art[ERROR_ART] = {
 		"                ||     ||\n"
 #endif
 };
+
+#define ERROR_ART (sizeof(error_art) / sizeof(char *))
 
 char* random_error_message(void)
 {
